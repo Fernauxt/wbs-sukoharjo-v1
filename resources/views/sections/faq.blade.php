@@ -1,0 +1,1 @@
+<div class="lg:py-20 lg:px-12"></div>

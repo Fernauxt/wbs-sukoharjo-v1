@@ -7,7 +7,7 @@
     @include('sections.hero')
 </section>
 
-<section id="how-to" class="lg:mt-4 lg:mx-8">
+<section id="how-to" class="lg:mt-4 lg:mx-8 bg-base-200">
     @include('sections.how-to')
 </section>
 
