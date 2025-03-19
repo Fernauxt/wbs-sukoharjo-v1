@@ -1,4 +1,4 @@
-<div class="hero min-h-screen bg-gradient-to-b from-base-900 to-base-100">
+<div class="hero min-h-screen bg-gradient-to-b from-base-200 to-base-100">
     <div class="hero-content flex flex-col items-center text-center">
         <div class="max-w-9xl" data-aos="fade-up" data-aos-duration="1000">
             <h1 class="text-1xl font-base text-gray-900 lg:text-5xl lg:pt-10" data-aos="fade-down" data-aos-delay="100"
@@ -59,7 +59,7 @@
     </div>
 </div>
 
-<div class="hero min-h-screen bg-base-900 text-center">
+<div class="hero min-h-screen text-center">
     <div class="hero-content flex-col">
         <h1 class="text-2xl font-bold font-cursive text-red-600 pt-4 lg:text-6xl" data-aos="zoom-in"
             data-aos-delay="200" data-aos-duration="1000">
