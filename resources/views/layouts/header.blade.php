@@ -20,7 +20,7 @@
                 <a href="#cara-pengaduan" class="btn btn-ghost text-lg font-semibold mt-1.5 transition-colors duration-300 hover:text-amber-500 {{ request()->is('#cara-pengaduan') ? 'text-amber-700' : '' }}">Tata Cara Pengaduan</a>
                 <a href="{{ route('track-report') }}" class="btn btn-ghost text-lg font-semibold mt-1.5 transition-colors duration-300 hover:text-amber-500 {{ request()->routeIs('track-report') ? 'text-amber-700' : '' }}">Lacak Pengaduan</a>
                 <a href="#kontak" class="btn btn-ghost text-lg font-semibold mt-1.5 transition-colors duration-300 hover:text-amber-500 {{ request()->is('#kontak') ? 'text-amber-700' : '' }}">Kontak</a>
-                <button class="btn bg-amber-600 rounded-4xl p-6 text-lg text-white font-semibold hover:bg-red-700 hover:scale-105 transition-all duration-500 ease-in-out">Buat Pengaduan</button>
+                <a href="{{ route('report') }}" class="btn bg-amber-600 rounded-4xl p-6 text-lg text-white font-semibold hover:bg-red-700 hover:scale-105 transition-all duration-500 ease-in-out">Buat Pengaduan</a>
             </div>
         </div>
     </nav>

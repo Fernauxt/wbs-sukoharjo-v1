@@ -1,4 +1,4 @@
-<div class="hero min-h-screen bg-gradient-to-b from-base-100 to-base-200 text-center" id="cara-pengaduan">
+<div class="hero min-h-screen bg-gradient-to-b from-base-100 to-base-200 text-center">
     <div class="hero-content flex-col">
         <h1 class="text-2xl font-bold font-cursive text-red-600 pt-4 lg:text-6xl" data-aos="zoom-in" data-aos-delay="200"
             data-aos-duration="1000">

@@ -9,3 +9,8 @@ Route::get('/', function () {
 Route::get('/lacak-pengaduan', function () {
     return view('pages.track-report');
 })->name('track-report');
+
+Route::get('/pengaduan', function () {
+    return view('pages.create-report');
+})->name('report');
+

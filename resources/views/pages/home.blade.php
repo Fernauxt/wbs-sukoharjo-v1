@@ -7,11 +7,11 @@
     @include('sections.hero')
 </section>
 
-<section id="how-to" class="lg:mt-4">
+<section id="cara-pengaduan" class="lg:mt-4">
     @include('sections.how-to')
 </section>
 
-<section id="faq" class="lg:mt-4">
+<section id="kontak" class="lg:mt-4">
     @include('sections.contacts')
 </section>
 @endsection
