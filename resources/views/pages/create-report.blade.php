@@ -18,23 +18,26 @@
             <div class="bg-white px-8 py-12 rounded-xl shadow-lg m-8 max-w-4xl mx-auto">
                 <!-- Step 1: Identitas Pelapor -->
                 <div id="step1" class="step-content">
-                    <h2 class="text-xl lg:text-3xl font-bold mb-4 text-center">Identitas Pelapor</h2>
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-lg">Nama Pelapor</legend>
-                        <input type="text" class="input w-full" placeholder="Dapat menggunakan nama samaran" />
+                        <input type="text" id="namaPelapor" class="input w-full"
+                            placeholder="Dapat menggunakan nama samaran" />
                         <p class="fieldset-label text-red-600 mt-1">Wajib Diisi</p>
                     </fieldset>
+
                     <legend class="mt-2 fieldset-legend text-lg">Gunakan Email dan Nomor Telepon </legend>
                     <input type="checkbox" id="toggleContact" class="toggle toggle-error" checked />
+
                     <div id="contactFields" class="mt-4 transition-all duration-500 opacity-100 scale-100">
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend text-lg">Alamat Email</legend>
-                            <input type="email" class="input w-full" placeholder="Email" />
+                            <input type="email" id="emailPelapor" class="input w-full" placeholder="Email" />
                             <p class="fieldset-label text-red-600 mt-1">Wajib Diisi</p>
                         </fieldset>
+
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend text-lg">Nomor Telepon</legend>
-                            <input type="tel" class="input w-full" placeholder="Nomor Telepon" />
+                            <input type="tel" id="teleponPelapor" class="input w-full" placeholder="Nomor Telepon" />
                             <p class="fieldset-label text-red-600 mt-1">Wajib Diisi</p>
                         </fieldset>
                     </div>
@@ -42,30 +45,43 @@
 
                 <!-- Step 2: Detail Kejadian (Hidden by default) -->
                 <div id="step2" class="step-content hidden">
-                    <h2 class="text-xl lg:text-3xl font-bold mb-4 text-center">Detail Kejadian</h2>
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-lg">Jenis Pelanggaran</legend>
                         <select class="input w-full">
                             <option>- Pilih Jenis Pelanggaran -</option>
+                            <option>Korupsi</option>
+                            <option>Penyalahgunaan Wewenang</option>
+                            <option>Gratifikasi</option>
                         </select>
                     </fieldset>
+
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-lg">Nama Terlapor</legend>
-                        <input type="text" class="input w-full" placeholder="Nama" />
+                        <input type="text" class="input w-full" placeholder="Nama Terlapor" />
                     </fieldset>
+
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-lg">Unit Jabatan</legend>
                         <input type="text" class="input w-full" placeholder="Jabatan" />
                     </fieldset>
+
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-lg">Deskripsi Pelanggaran</legend>
-                        <textarea class="input w-full" placeholder="Deskripsi Pelanggaran"></textarea>
+                        <textarea class="textarea w-full" placeholder="Jelaskan secara rinci"></textarea>
                     </fieldset>
                 </div>
 
                 <!-- Step 3: Bukti Pendukung (Hidden by default) -->
                 <div id="step3" class="step-content hidden">
-                    <h2 class="text-xl lg:text-3xl font-bold mb-4 text-center">Bukti Kejadian Pelanggaran</h2>
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend text-lg">Lokasi Kejadian</legend>
+                        <input type="text" id="lokasiKejadian" class="input w-full"
+                            placeholder="Masukkan lokasi kejadian" />
+                    </fieldset>
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend text-lg">Waktu Kejadian</legend>
+                        <input type="datetime-local" id="waktuKejadian" class="input w-full" />
+                    </fieldset>
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-lg">Upload Bukti Pendukung</legend>
                         <input type="file" class="input w-full" />
@@ -75,9 +91,16 @@
 
                 <!-- Step 4: Konfirmasi (Hidden by default) -->
                 <div id="step4" class="step-content hidden">
-                    <h2 class="text-xl lg:text-3xl font-bold mb-4 text-center">Ringkasan Laporan</h2>
-                    <h2 class="text-xl font-bold mb-4">Konfirmasi Laporan Anda</h2>
-                    <p class="text-lg">Pastikan semua data yang Anda masukkan sudah benar sebelum mengirim laporan.</p>
+                    <h2 class="text-2xl font-bold mb-4">Ringkasan Laporan Anda</h2>
+                    <p><strong>Nama Pelapor:</strong> <span id="summaryNama"></span></p>
+                    <p><strong>Email:</strong> <span id="summaryEmail"></span></p>
+                    <p><strong>Telepon:</strong> <span id="summaryTelepon"></span></p>
+                    <p><strong>Jenis Pelanggaran:</strong> <span id="summaryJenis"></span></p>
+                    <p><strong>Nama Terlapor:</strong> <span id="summaryTerlapor"></span></p>
+                    <p><strong>Unit Jabatan:</strong> <span id="summaryJabatan"></span></p>
+                    <p><strong>Deskripsi:</strong> <span id="summaryDeskripsi"></span></p>
+                    <p><strong>Lokasi:</strong> <span id="summaryLokasi"></span></p>
+                    <p><strong>Waktu:</strong> <span id="summaryWaktu"></span></p>
                 </div>
 
                 <!-- Tombol Navigasi -->
@@ -92,4 +115,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
