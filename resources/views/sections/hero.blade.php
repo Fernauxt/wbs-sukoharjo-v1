@@ -17,10 +17,7 @@
                 data-aos-duration="1000">
                 Identitas Anda aman dan dirahasiakan. Kami menjamin laporan Anda diproses dengan transparan dan adil.
             </p>
-            <button
-                class="btn bg-amber-600 rounded-4xl p-6 mt-7 text-lg text-white font-semibold hover:bg-red-700 hover:scale-105 transition duration-150">
-                Buat Pengaduan
-            </button>
+           <a href="{{ route('report') }}" class="btn bg-amber-600 rounded-4xl mt-5 p-6 text-lg text-white font-semibold hover:bg-red-700 hover:scale-105 transition-all duration-500 ease-in-out">Buat Pengaduan</a>
         </div>
         <div class="" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
             <img src="{{ asset('img/img-hero.png') }}" alt="Ilustrasi Input Laporan" class="h-105" data-aos="fade"
@@ -129,8 +126,8 @@
                     </ul>
                 </div>
                 <div class="card-body bg-base-100 border-1 p-8 text-justify rounded-2xl hover:border-0 hover:scale-110 hover:shadow-2xl transition-all duration-150 ease-in-out">
-                    <figure class="px-10 pt-10">
-                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                    <figure class="">
+                        <img src="{{ asset('img/5w1h.png') }}"
                             alt="Shoes" class="rounded-xl" />
                     </figure>
                     <div class="card-body items-center text-center">

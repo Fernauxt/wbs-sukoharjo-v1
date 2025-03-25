@@ -8,10 +8,10 @@
             <h1 class="text-2xl lg:text-7xl font-bold mt-4 text-center">Form Pengaduan</h1>
             <div class="mt-8 text-center">
                 <ul class="steps">
-                    <li class="step step-success" id="step1Indicator">Identitas Pelapor</li>
+                    <li class="step step-error" id="step1Indicator">Identitas Pelapor</li>
                     <li class="step" id="step2Indicator">Detail Kejadian</li>
                     <li class="step" id="step3Indicator">Bukti Pendukung</li>
-                    <li class="step" id="step4Indicator">Konfirmasi</li>
+                    <li class="step" id="step4Indicator">Ringkasan Laporan</li>
                 </ul>
             </div>
 
@@ -21,8 +21,17 @@
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-lg">Nama Pelapor</legend>
                         <input type="text" id="namaPelapor" class="input w-full"
-                            placeholder="Dapat menggunakan nama samaran" />
-                        <p class="fieldset-label text-red-600 mt-1">Wajib Diisi</p>
+                            placeholder="Dapat menggunakan nama samaran" required />
+                        <p class="fieldset-label text-red-600 mt-1" id="namaError">Wajib Diisi</p>
+                    </fieldset>
+
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend text-lg">Jenis Pelapor</legend>
+                        <select class="input w-full">
+                            <option>- Pilih Jenis Pelapor -</option>
+                            <option>Aparatur Sipil Negara (ASN)</option>
+                            <option>Masyarakat Umum</option>
+                        </select>
                     </fieldset>
 
                     <legend class="mt-2 fieldset-legend text-lg">Gunakan Email dan Nomor Telepon </legend>
@@ -31,45 +40,77 @@
                     <div id="contactFields" class="mt-4 transition-all duration-500 opacity-100 scale-100">
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend text-lg">Alamat Email</legend>
-                            <input type="email" id="emailPelapor" class="input w-full" placeholder="Email" />
-                            <p class="fieldset-label text-red-600 mt-1">Wajib Diisi</p>
+                            <input type="email" id="emailPelapor" class="input w-full" placeholder="Email" required />
+                            <p class="fieldset-label text-red-600 mt-1" id="emailError"></p>
                         </fieldset>
 
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend text-lg">Nomor Telepon</legend>
-                            <input type="tel" id="teleponPelapor" class="input w-full" placeholder="Nomor Telepon" />
-                            <p class="fieldset-label text-red-600 mt-1">Wajib Diisi</p>
+                            <input type="tel" id="teleponPelapor" class="input w-full" placeholder="Nomor Telepon"
+                                required />
+                            <p class="fieldset-label text-red-600 mt-1" id="teleponError"></p>
                         </fieldset>
+                    </div>
+
+                    <div id="infoFields" class="mt-4 transition-all duration-500 opacity-0 scale-95 hidden">
+                        <p class="lg:text-xl">
+                            Pencantuman email akan memudahkan kami dalam menyampaikan update status tindak lanjut
+                            laporan Anda secara otomatis melalui email yang Anda cantumkan.
+                        </p>
+                        <p class="lg:text-xl my-4">
+                            Jika Anda tidak mencantumkan email, Anda tetap dapat melakukan pemantauan laporan
+                            secara manual melalui kode yang akan diberikan di akhir pelaporan.
+                        </p>
+                        <p class="lg:text-xl">Pastikan Anda menyimpan kode tersebut!</p>
                     </div>
                 </div>
 
-                <!-- Step 2: Detail Kejadian (Hidden by default) -->
+                <!-- Step 2: Detail Kejadian -->
                 <div id="step2" class="step-content hidden">
+                    <!-- Pilih Jenis Pelanggaran -->
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-lg">Jenis Pelanggaran</legend>
                         <select class="input w-full">
                             <option>- Pilih Jenis Pelanggaran -</option>
-                            <option>Korupsi</option>
-                            <option>Penyalahgunaan Wewenang</option>
-                            <option>Gratifikasi</option>
+                            <option>Korupsi, Kecurangan, dan Penyalahgunaan Wewenang</option>
+                            <option>Pelanggaran Hukum, Etika, dan Peraturan</option>
+                            <option>Pelecehan, Diskriminasi, dan Pelanggaran HAM</option>
+                            <option>Pelanggaran Keamanan dan Kerahasiaan Data</option>
                         </select>
                     </fieldset>
 
-                    <fieldset class="fieldset">
-                        <legend class="fieldset-legend text-lg">Nama Terlapor</legend>
-                        <input type="text" class="input w-full" placeholder="Nama Terlapor" />
-                    </fieldset>
+                    <!-- Container untuk Nama Terlapor & Unit Jabatan -->
+                    <div id="terlaporContainer">
+                        <!-- Baris pertama default -->
+                        <div class="terlapor-item flex space-x-4 mt-4">
+                            <!-- Input Nama Terlapor -->
+                            <fieldset class="fieldset w-1/2">
+                                <legend class="fieldset-legend text-lg">Nama Terlapor</legend>
+                                <input type="text" class="input w-full" name="nama_terlapor[]"
+                                    placeholder="Nama Terlapor" />
+                            </fieldset>
 
-                    <fieldset class="fieldset">
-                        <legend class="fieldset-legend text-lg">Unit Jabatan</legend>
-                        <input type="text" class="input w-full" placeholder="Jabatan" />
-                    </fieldset>
+                            <!-- Input Unit Jabatan -->
+                            <fieldset class="fieldset w-1/2">
+                                <legend class="fieldset-legend text-lg">Unit Jabatan</legend>
+                                <input type="text" class="input w-full" name="unit_jabatan[]" placeholder="Jabatan" />
+                            </fieldset>
 
-                    <fieldset class="fieldset">
+                            <!-- Tombol "+" untuk menambah input baru -->
+                            <button type="button" class="btn btn-outline btn-success px-3 py-2 mb-1 self-end"
+                                id="addTerlapor">
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Deskripsi Pelanggaran -->
+                    <fieldset class="fieldset mt-4">
                         <legend class="fieldset-legend text-lg">Deskripsi Pelanggaran</legend>
-                        <textarea class="textarea w-full" placeholder="Jelaskan secara rinci"></textarea>
+                        <textarea class="textarea w-full h-64" name="deskripsi_pelanggaran" placeholder="Jelaskan secara rinci"></textarea>
                     </fieldset>
                 </div>
+
 
                 <!-- Step 3: Bukti Pendukung (Hidden by default) -->
                 <div id="step3" class="step-content hidden">
