@@ -54,6 +54,14 @@ toggle.addEventListener("change", () => {
 let currentStep = 1;
 const totalSteps = 4;
 
+const form = document.querySelector("form");
+
+form.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && currentStep !== totalSteps) {
+        e.preventDefault();
+    }
+});
+
 document.getElementById("nextButton").addEventListener("click", () => {
     if (currentStep < totalSteps) {
         document.getElementById(`step${currentStep}`).classList.add("hidden");
@@ -122,12 +130,12 @@ document.addEventListener("DOMContentLoaded", function () {
             newTerlapor.innerHTML = `
                 <!-- Nama Terlapor -->
                 <fieldset class="fieldset w-1/2">
-                    <input type="text" class="input w-full" name="nama_terlapor[]" placeholder="Nama Terlapor" />
+                    <input type="text" class="input w-full" name="reported_name[]" placeholder="Nama Terlapor" />
                 </fieldset>
 
                 <!-- Unit Jabatan -->
                 <fieldset class="fieldset w-1/2">
-                    <input type="text" class="input w-full" name="unit_jabatan[]" placeholder="Jabatan" />
+                    <input type="text" class="input w-full" name="reported_unit[]" placeholder="Jabatan" />
                 </fieldset>
 
                 <!-- Tombol "-" untuk hapus -->

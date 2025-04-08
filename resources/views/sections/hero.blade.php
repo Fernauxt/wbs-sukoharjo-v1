@@ -126,7 +126,7 @@
                     </ul>
                 </div>
                 <div class="card-body bg-base-100 border-1 p-8 text-justify rounded-2xl hover:border-0 hover:scale-110 hover:shadow-2xl transition-all duration-150 ease-in-out">
-                    <figure class="">
+                    <figure>
                         <img src="{{ asset('img/5w1h.png') }}"
                             alt="Shoes" class="rounded-xl" />
                     </figure>
