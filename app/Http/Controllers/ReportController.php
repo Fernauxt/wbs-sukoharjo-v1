@@ -7,8 +7,9 @@ use App\Models\ReportCategory;
 use App\Models\Status;
 use App\Models\Informant;
 use App\Models\Report;
-use App\Models\ReportedPerson;
 use App\Models\ReportedParty;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -23,20 +24,25 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         // Validasi input
         $validated = $request->validate([
             'informant_id' => 'required|exists:informants,id',
             'category_id' => 'required|exists:report_categories,id',
-            'reported_name.*' => 'required|string|max:255', // multiple names
+            'reported_name.*' => 'required|string|max:255',
             'reported_unit.*' => 'nullable|string|max:255',
             'subject' => 'required|string|max:255',
             'description' => 'required|string',
             'status_id' => 'required|exists:statuses,id',
         ]);
 
-        // Simpan report utama
+        // Generate unique token
+        do {
+            $token = Str::upper(Str::random(6));
+        } while (Report::where('token', $token)->exists());
+
+        // Simpan report
         $report = Report::create([
+            'token' => $token,
             'informant_id' => $validated['informant_id'],
             'category_id' => $validated['category_id'],
             'subject' => $validated['subject'],
@@ -44,7 +50,7 @@ class ReportController extends Controller
             'status_id' => $validated['status_id'],
         ]);
 
-        // Simpan semua terlapor
+        // Simpan data terlapor
         foreach ($request->reported_name as $index => $name) {
             ReportedParty::create([
                 'report_id' => $report->id,
@@ -53,6 +59,17 @@ class ReportController extends Controller
             ]);
         }
 
-        return redirect()->route('report')->with('success', 'Laporan berhasil dikirim!');
+        // Redirect ke halaman berhasil sambil membawa token
+        return redirect()->route('report.success', ['token' => $token]);
+    }
+
+    // Halaman setelah berhasil kirim laporan
+    public function success($token)
+    {
+        $report = Report::where('token', $token)->firstOrFail();
+
+        return view('pages.report-success', [
+            'token' => $report->token,
+        ]);
     }
 }

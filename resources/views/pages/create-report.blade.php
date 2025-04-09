@@ -3,7 +3,7 @@
 @section('title', 'Pengaduan')
 
 @section('content')
-    <form method="POST" action="{{ route('report.store') }}" enctype="multipart/form-data">
+    <form method="POST" id="form-laporan" action="{{ route('report.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="bg-base-200 min-h-screen">
             <div class="p-8 lg:p-24 min-h-screen items-center">
@@ -22,7 +22,7 @@
                     <div id="step1" class="step-content">
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend text-lg">Nama Pelapor</legend>
-                            <input type="text" name="informant_name" id="namaPelapor" class="input w-full"
+                            <input type="text" name="informant_name" id="informant_name" class="input w-full"
                                 placeholder="Dapat menggunakan nama samaran" required />
                             <p class="fieldset-label text-red-600 mt-1" id="namaError"></p>
 
@@ -35,17 +35,18 @@
                         </fieldset>
 
                         <legend class="mt-2 fieldset-legend text-lg">Gunakan Email dan Nomor Telepon </legend>
-                        <input type="checkbox" id="toggleContact" class="toggle toggle-error" checked />
+                        <input type="checkbox" id="toggleContact" class="toggle toggle-error"/>
 
                         <div id="contactFields" class="mt-4 transition-all duration-500 opacity-100 scale-100">
                             <fieldset class="fieldset">
                                 <legend class="fieldset-legend text-lg">Alamat Email</legend>
-                                <input name="email" type="email" id="emailPelapor" class="input w-full" placeholder="Email" required />
+                                <input name="email" type="email" id="email" class="input w-full" placeholder="Email"
+                                    required />
                                 <p class="fieldset-label text-red-600 mt-1" id="emailError"></p>
 
                                 <legend class="fieldset-legend text-lg">Nomor Telepon</legend>
-                                <input name="phone" type="tel" id="teleponPelapor" class="input w-full" placeholder="Nomor Telepon"
-                                    required />
+                                <input name="phone" type="tel" id="phone" class="input w-full"
+                                    placeholder="Nomor Telepon" required />
                                 <p class="fieldset-label text-red-600 mt-1" id="teleponError"></p>
                             </fieldset>
                         </div>
@@ -119,10 +120,10 @@
                     <div id="step3" class="step-content hidden">
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend text-lg">Lokasi Kejadian</legend>
-                            <input type="text" name="location" id="lokasiKejadian" class="input w-full"
+                            <input type="text" name="location" id="location" class="input w-full"
                                 placeholder="Masukkan lokasi kejadian" />
                             <legend class="fieldset-legend text-lg">Waktu Kejadian</legend>
-                            <input type="datetime-local" name="datetime" id="waktuKejadian" class="input w-full" />
+                            <input type="datetime-local" name="datetime" id="datetime" class="input w-full" />
                             <legend class="fieldset-legend text-lg">Upload Bukti Pendukung</legend>
                             <input type="file" name="evidence" class="input w-full" />
                             <p class="fieldset-label mt-1">Format yang didukung: jpg, png, pdf. Maks 10 file</p>
@@ -146,7 +147,7 @@
                     <!-- Tombol Navigasi -->
                     <div class="mt-6 flex justify-between items-center">
                         <button type="button" id="prevButton"
-                        class="btn btn-secondary btn-lg px-6 py-2 text-white font-bold rounded-lg hidden">Sebelumnya</button>
+                            class="btn btn-secondary btn-lg px-6 py-2 text-white font-bold rounded-lg hidden">Sebelumnya</button>
                         <button type="button" id="nextButton"
                             class="btn btn-success btn-lg px-6 py-2 text-white font-bold rounded-lg">Selanjutnya</button>
                         <button type="submit" id="submitButton"

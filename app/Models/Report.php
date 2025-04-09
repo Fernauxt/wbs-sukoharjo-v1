@@ -9,6 +9,7 @@ class Report extends Model
     protected $table = 'reports';
 
     protected $fillable = [
+        'token',
         'informant_id',
         'category_id',
         'reported_name',
@@ -37,7 +38,8 @@ class Report extends Model
         return $this->belongsTo(Status::class, 'status_id');
     }
 
-    public function attachments()
+    // Ubah nama method ini kalau kolom 'attachments' sudah ada di $fillable
+    public function attachmentFiles()
     {
         return $this->hasMany(Attachment::class, 'report_id');
     }
