@@ -27,15 +27,16 @@
                             <p class="fieldset-label text-red-600 mt-1" id="namaError"></p>
 
                             <legend class="fieldset-legend text-lg">Jenis Pelapor</legend>
-                            <select name="informant_type" class="input w-full">
-                                <option>- Pilih Jenis Pelapor -</option>
-                                <option>Aparatur Sipil Negara (ASN)</option>
-                                <option>Masyarakat Umum</option>
+                            <select name="informant_type_id" class="input w-full">
+                                <option value="" disabled selected>- Pilih Jenis Pelapor -</option>
+                                @foreach ($informant_types as $type)
+                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                @endforeach
                             </select>
                         </fieldset>
 
                         <legend class="mt-2 fieldset-legend text-lg">Gunakan Email dan Nomor Telepon </legend>
-                        <input type="checkbox" id="toggleContact" class="toggle toggle-error"/>
+                        <input type="checkbox" id="toggleContact" class="toggle toggle-error" />
 
                         <div id="contactFields" class="mt-4 transition-all duration-500 opacity-100 scale-100">
                             <fieldset class="fieldset">
@@ -69,11 +70,11 @@
                         <!-- Pilih Jenis Pelanggaran -->
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend text-lg">Jenis Pelanggaran</legend>
-                            <select name="category" class="input w-full">
-                                <option>- Pilih Jenis Pelanggaran -</option>
-                                <option>Korupsi, Kecurangan, dan Penyalahgunaan Wewenang</option>
-                                <option>Pelanggaran Hukum, Etika, dan Peraturan</option>
-                                <option>Pelecehan, Diskriminasi, dan Pelanggaran HAM</option>
+                            <select name="category_id" class="input w-full">
+                                <option value="" disabled selected>- Pilih Kategori Laporan -</option>
+                                @foreach ($categories as $type)
+                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                @endforeach
                             </select>
                         </fieldset>
 
@@ -147,11 +148,11 @@
                     <!-- Tombol Navigasi -->
                     <div class="mt-6 flex justify-between items-center">
                         <button type="button" id="prevButton"
-                            class="btn btn-secondary btn-lg px-6 py-2 text-white font-bold rounded-lg hidden">Sebelumnya</button>
+                            class="btn bg-amber-600 hover:bg-red-800 btn-lg text-white font-bold rounded-lg hidden">Sebelumnya</button>
                         <button type="button" id="nextButton"
-                            class="btn btn-success btn-lg px-6 py-2 text-white font-bold rounded-lg">Selanjutnya</button>
+                            class="btn bg-green-700 hover:bg-green-800 btn-lg text-white font-bold rounded-lg">Selanjutnya</button>
                         <button type="submit" id="submitButton"
-                            class="btn btn-primary btn-lg px-6 py-2 text-white font-bold rounded-lg hidden">Kirim
+                            class="btn bg-blue-600 hover:bg-blue-800 btn-lg text-white font-bold rounded-lg hidden">Kirim
                             Laporan</button>
                     </div>
                 </div>

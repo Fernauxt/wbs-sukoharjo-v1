@@ -3,59 +3,62 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Report extends Model
 {
-    protected $table = 'reports';
-
     protected $fillable = [
         'token',
         'informant_id',
         'category_id',
-        'reported_name',
-        'reported_unit',
         'subject',
         'description',
         'location',
         'incident_time',
-        'attachments',
         'status_id',
-        'reported_at'
     ];
 
-    public function informant()
+    protected $casts = [
+        'reported_at' => 'datetime',
+    ];
+
+    public $timestamps = false; // karena pakai reported_at sebagai timestamp
+
+    // Relasi ke Informant
+    public function informant(): BelongsTo
     {
-        return $this->belongsTo(Informant::class, 'informant_id');
+        return $this->belongsTo(Informant::class);
     }
 
-    public function category()
+    // Relasi ke Report Category
+    public function category(): BelongsTo
     {
         return $this->belongsTo(ReportCategory::class, 'category_id');
     }
 
-    public function status()
+    // Relasi ke Status
+    public function status(): BelongsTo
     {
-        return $this->belongsTo(Status::class, 'status_id');
+        return $this->belongsTo(Status::class);
     }
 
-    // Ubah nama method ini kalau kolom 'attachments' sudah ada di $fillable
-    public function attachmentFiles()
+    // Relasi ke FollowUp
+    public function followUp(): HasOne
     {
-        return $this->hasMany(Attachment::class, 'report_id');
+        return $this->hasOne(FollowUp::class);
     }
 
-    public function followUps()
-    {
-        return $this->hasMany(FollowUp::class, 'report_id');
-    }
-
-    public function reportedPersons()
-    {
-        return $this->hasMany(ReportedPerson::class, 'report_id');
-    }
-
-    public function reportedParties()
+    // Relasi ke ReportedParties
+    public function reportedParties(): HasMany
     {
         return $this->hasMany(ReportedParty::class);
+    }
+
+    // Relasi ke Attachments
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class);
     }
 }

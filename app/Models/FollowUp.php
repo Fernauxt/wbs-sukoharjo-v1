@@ -8,7 +8,9 @@ class FollowUp extends Model
 {
     protected $table = 'follow_ups';
 
-    protected $fillable = ['report_id', 'notes', 'status_id'];
+    public $timestamps = false;
+
+    protected $fillable = ['report_id', 'notes', 'status_id', 'modified_at', 'created_at'];
 
     public function report()
     {
@@ -18,5 +20,10 @@ class FollowUp extends Model
     public function status()
     {
         return $this->belongsTo(Status::class, 'status_id');
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany(FollowUpAttachment::class);
     }
 }

@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
             summaryTelepon.textContent = get("phone")?.value || "-";
 
         const categorySelect = document.querySelector(
-            'select[name="category"]'
+            'select[name="category_id"]'
         );
         const summaryJenis = get("summaryJenis");
         if (summaryJenis)

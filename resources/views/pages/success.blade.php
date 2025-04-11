@@ -1,49 +1,37 @@
-@extends('layouts.main')
+@extends('layouts.endpage')
 
 @section('title', 'Pengaduan Berhasil')
 
 @section('content')
-    <div class="hero min-h-screen bg-gradient-to-b from-base-200 to-base-100">
-        <div class="hero-content flex flex-col items-center text-center">
-            <div class="max-w-9xl" data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="text-1xl font-base text-gray-900 lg:text-5xl lg:pt-10" data-aos="fade-down" data-aos-delay="100"
-                    data-aos-duration="1000">
-                    Laporan Anda Telah Dikirim
-                </h1>
-                <h1 class="text-2xl font-bold uppercase text-gray-900 pt-4 lg:text-6xl" data-aos="zoom-in"
-                    data-aos-delay="200" data-aos-duration="1000">
-                    Whistleblowing System <br> Kabupaten Sukoharjo
-                </h1>
-                <p class="pt-7 text-base text-gray-900 lg:text-xl" data-aos="fade-in" data-aos-delay="300"
-                    data-aos-duration="1000">
-                    Terima kasih telah mendukung transparansi pemerintahan yang bersih dan terpercaya.
-                </p>
-                <p class="text-sm pt-1 text-gray-900 lg:text-lg" data-aos="fade-in" data-aos-delay="400"
-                    data-aos-duration="1000">
-                    Identitas Anda aman dan dirahasiakan. Laporan Anda akan segera diproses.
-                </p>
-
-                @if (session('token'))
-                    <div class="mt-6 p-6 rounded-xl bg-white shadow-lg border border-amber-300 max-w-md mx-auto"
-                        data-aos="zoom-in-up" data-aos-delay="500" data-aos-duration="1000">
-                        <h2 class="text-xl font-semibold text-gray-800">Kode Laporan Anda:</h2>
-                        <div class="text-3xl font-bold text-amber-600 tracking-widest mt-2">
-                            {{ session('token') }}
-                        </div>
-                        <p class="mt-2 text-gray-600 text-sm">Catat atau simpan kode ini untuk memantau perkembangan laporan
-                            Anda.</p>
-                    </div>
-                @endif
-
-                <a href="{{ route('report') }}"
-                    class="btn bg-amber-600 rounded-4xl mt-8 p-6 text-lg text-white font-semibold hover:bg-red-700 hover:scale-105 transition-all duration-500 ease-in-out">
-                    Buat Pengaduan Baru
-                </a>
-            </div>
-
-            <div class="mt-10" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
-                <img src="{{ asset('img/img-hero.png') }}" alt="Ilustrasi Input Laporan" class="h-105" />
+<div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4">
+    <div class="bg-white shadow-xl rounded-2xl p-8 max-w-2xl w-full text-center">
+        <div class="flex justify-center mb-4">
+            <div class="bg-green-100 text-green-600 rounded-full p-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5 13l4 4L19 7" />
+                </svg>
             </div>
         </div>
+        <h2 class="text-2xl font-bold mb-2 text-gray-800">Laporan Terkirim!</h2>
+        <p class="text-gray-600 mb-4">Terima kasih, laporan Anda telah berhasil dikirim.</p>
+
+        <div class="bg-gray-100 rounded-xl px-4 py-3 mb-4 text-sm text-gray-800">
+            Token Laporan Anda:<br>
+            <span class="font-mono text-3xl font-semibold text-gray-900">{{ $token }}</span>
+        </div>
+
+        <p class="text-gray-500 mb-2">Simpan token ini untuk melihat status laporan Anda.</p>
+
+        <a href="{{ route('home') }}"
+            class="inline-block mt-4 px-6 py-2 bg-amber-600 text-white rounded-full hover:bg-amber-900 transition">
+            Kembali ke Beranda
+        </a>
+        <a href="{{ route('report') }}"
+            class="inline-block mt-4 px-6 py-2 bg-red-800 text-white rounded-full hover:bg-red-900 transition">
+            Buat Pengaduan Baru
+        </a>
     </div>
+</div>
 @endsection

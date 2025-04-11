@@ -3,21 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Attachment extends Model
 {
-    protected $table = 'attachments';
-
     protected $fillable = [
         'report_id',
         'file_path',
         'file_type',
-        'original_name',
-        'description'
+        'file_name',
     ];
 
-    public function report()
+    public function report(): BelongsTo
     {
-        return $this->belongsTo(Report::class, 'report_id');
+        return $this->belongsTo(Report::class);
     }
 }

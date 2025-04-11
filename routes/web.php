@@ -17,4 +17,8 @@ Route::get('/lacak-pengaduan', function () {
 
 Route::get('/pengaduan', [ReportController::class, 'create'])->name('report');
 Route::post('/pengaduan/kirim', [ReportController::class, 'store'])->name('report.store');
-Route::get('/report/success/{token}', [ReportController::class, 'success'])->name('report.success');
+Route::get('/pengaduan/sukses/{token}', [ReportController::class, 'success'])->name('report.success');
+
+// Route::get('/lacak-pengaduan', [ReportController::class, 'track'])->name('report.track');
+
+Route::match(['get', 'post'], '/lacak-pengaduan', [ReportController::class, 'track'])->name('report.track');
