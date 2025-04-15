@@ -6,6 +6,7 @@
     <div class="bg-white p-6 rounded-xl shadow">
         <h2 class="text-xl font-semibold text-gray-700 mb-4">Detail Laporan</h2>
 
+        <!--- General Informasi --->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="bg-gray-50 p-4 rounded-lg shadow">
                 <h3 class="text-lg font-semibold text-gray-700 mb-2">Informasi Laporan</h3>
