@@ -261,3 +261,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+document
+    .getElementById("followUpButton")
+    .addEventListener("click", function () {
+        document.getElementById("followUpModal").classList.remove("hidden");
+    });
+
+document
+    .getElementById("closeModalButton")
+    .addEventListener("click", function () {
+        document.getElementById("followUpModal").classList.add("hidden");
+    });

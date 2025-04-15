@@ -1,7 +1,7 @@
 <header class="bg-white shadow p-4 flex items-center justify-between">
     <div>
         <h2 class="text-xl font-semibold capitalize">
-            {{ $title ?? 'Dashboard' }}
+            Admin Panel WBS Kabupaten Sukoharjo
         </h2>
     </div>
 

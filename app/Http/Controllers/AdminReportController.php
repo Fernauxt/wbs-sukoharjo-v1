@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Report;
 use App\Models\Status;
+use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
 
 class AdminReportController extends Controller
 {
@@ -25,12 +26,22 @@ class AdminReportController extends Controller
     }
 
 
-    public function show($id){
+    public function show($id)
+    {
         // Ambil laporan berdasarkan ID
         $report = Report::findOrFail($id);
 
         // Kembalikan view dengan data laporan
-        return view('admin.reports.show', compact('report'));
+        return view('admin.reports.details', compact('report'));
+    }
+
+    public function followUp(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'status'
+        ]);
+
+        $report = Report::findOrFail($id);
     }
     
     

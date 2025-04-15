@@ -5,6 +5,11 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashController;
 use App\Http\Controllers\AdminReportController;
+use Carbon\Carbon;
+
+Route::get('/cek-waktu', function () {
+    return Carbon::now()->toDateTimeString();
+});
 
 // Route for end-user (pengguna)
 Route::get('/', function () {
@@ -27,5 +32,4 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [AdminDashController::class, 'index'])->name('admin.dashboard');
     Route::get('/laporan', [AdminReportController::class, 'index'])->name('admin.reports.index');
     Route::get('/laporan/{id}', [AdminReportController::class, 'show'])->name('admin.reports.show');
-    // Nanti route admin lainnya juga masuk sini ya
 });

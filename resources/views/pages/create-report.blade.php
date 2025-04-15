@@ -126,7 +126,7 @@
                             <legend class="fieldset-legend text-lg">Waktu Kejadian</legend>
                             <input type="datetime-local" name="datetime" id="datetime" class="input w-full" />
                             <legend class="fieldset-legend text-lg">Upload Bukti Pendukung</legend>
-                            <input type="file" name="evidence" class="input w-full" />
+                            <input type="file" name="evidence" class="input w-full" multiple/>
                             <p class="fieldset-label mt-1">Format yang didukung: jpg, png, pdf. Maks 10 file</p>
                         </fieldset>
                     </div>

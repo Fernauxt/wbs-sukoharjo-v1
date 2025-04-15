@@ -16,7 +16,6 @@ class Report extends Model
         'subject',
         'description',
         'location',
-        //'incident_time',
         'status_id',
     ];
 

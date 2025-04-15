@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('subject');
             $table->text('description');
             $table->string('location');
-            $table->string('incident_time');
+            $table->datetime('incident_time');
             $table->json('attachments')->nullable();
             $table->foreignId('status_id')->constrained('statuses')->onDelete('restrict');
             $table->timestamp('reported_at');
