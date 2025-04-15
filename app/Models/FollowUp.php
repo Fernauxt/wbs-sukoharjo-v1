@@ -10,7 +10,17 @@ class FollowUp extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['report_id', 'notes', 'status_id', 'modified_at', 'created_at'];
+    protected $fillable = [
+        'report_id',
+        'notes',
+        'status_id',
+        // 'modified_at',
+        // 'created_at'
+    ];
+    protected $casts = [
+        'modified_at' => 'datetime',
+        'created_at' => 'datetime',
+    ];
 
     public function report()
     {

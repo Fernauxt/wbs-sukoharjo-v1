@@ -6,7 +6,7 @@
     <div class="flex justify-center items-center h-screen">
         <!-- Left: Image -->
         <div class="w-3/4 h-screen hidden lg:block">
-            <img src="https://img.freepik.com/fotos-premium/imagen-fondo_910766-187.jpg?w=826"
+            <img src=""
                 alt="Placeholder Image" class="object-cover w-full h-full">
         </div>
 
@@ -47,7 +47,7 @@
 
                 <!-- Login Button -->
                 <button type="submit"
-                    class="bg-red-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">
+                    class="btn bg-red-500 hover:bg-red-800 text-white font-semibold rounded-md py-2 px-4 w-full">
                     Login
                 </button>
             </form>

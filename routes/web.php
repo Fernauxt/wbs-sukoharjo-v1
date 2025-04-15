@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminAuthController;
-
+use App\Http\Controllers\AdminDashController;
+use App\Http\Controllers\AdminReportController;
 
 // Route for end-user (pengguna)
 Route::get('/', function () {
@@ -18,13 +19,13 @@ Route::match(['get', 'post'], '/lacak-pengaduan', [ReportController::class, 'tra
 
 
 // Route for admin (panel administrasi)
-// routes/web.php
-
 Route::get('/admin', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 Route::prefix('admin')->middleware('admin')->group(function () {
-    Route::get('/dashboard', fn() => 'Halo Admin!')->name('admin.dashboard');
+    Route::get('/dashboard', [AdminDashController::class, 'index'])->name('admin.dashboard');
+    Route::get('/laporan', [AdminReportController::class, 'index'])->name('admin.reports.index');
+    Route::get('/laporan/{id}', [AdminReportController::class, 'show'])->name('admin.reports.show');
     // Nanti route admin lainnya juga masuk sini ya
 });
