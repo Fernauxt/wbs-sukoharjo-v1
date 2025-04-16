@@ -46,10 +46,13 @@ class ReportController extends Controller
             'violation_subject' => 'required|string|max:255',
             'violation_desc' => 'required|string',
             'location' => 'required|string|max:255',
-            'datetime' => 'required|date',
+            'datetime' => 'required|date_format:Y-m-d\TH:i',
 
-            'evidence' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,zip|max:5120',
+            'evidence' => 'nullable|array|max:5',
+            'evidence.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,zip|max:5120',
         ]);
+
+    
 
         // Simpan informant
         $informant = Informant::create([
@@ -58,6 +61,7 @@ class ReportController extends Controller
             'phone' => $validated['phone'] ?? null,
             'type_id' => $validated['informant_type_id'],
         ]);
+
 
         // Generate unique token
         do {
@@ -72,7 +76,7 @@ class ReportController extends Controller
             'subject' => $validated['violation_subject'],
             'description' => $validated['violation_desc'],
             'location' => $validated['location'],
-            'incident_time' => $validated['datetime'],
+            'incident_time' => Carbon::parse($validated['datetime']),
             'status_id' => 1, // Default "Terkirim"
         ]);
 
@@ -80,8 +84,6 @@ class ReportController extends Controller
             'report_id' => $report->id,
             'status_id' => 1, // Default "Terkirim"
             'notes' => 'Laporan telah berhasil dikirim dan sedang menunggu verifikasi.',
-            'modified_at' => now(),
-            'created_at' => now(),
         ]);
 
         FollowUpAttachment::create([
@@ -102,15 +104,16 @@ class ReportController extends Controller
 
         // Simpan attachment (jika ada)
         if ($request->hasFile('evidence')) {
-            $file = $request->file('evidence');
-            $path = $file->store('attachments', 'public');
+            foreach ($request->file('evidence') as $file) {
+                $path = $file->store('attachments', 'public');
 
-            Attachment::create([
-                'report_id' => $report->id,
-                'file_path' => $path,
-                'file_name' => $file->getClientOriginalName(),
-                'file_type' => $file->getClientMimeType(),
-            ]);
+                Attachment::create([
+                    'report_id' => $report->id,
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'file_type' => $file->getClientMimeType(),
+                ]);
+            }
         }
 
         // Redirect ke halaman berhasil sambil membawa token

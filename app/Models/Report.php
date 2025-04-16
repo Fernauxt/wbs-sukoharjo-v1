@@ -16,12 +16,12 @@ class Report extends Model
         'subject',
         'description',
         'location',
+        'incident_time',
         'status_id',
     ];
 
     protected $casts = [
         'reported_at' => 'datetime',
-        'incident_time' => 'datetime',
     ];
 
     public $timestamps = false; // karena pakai reported_at sebagai timestamp

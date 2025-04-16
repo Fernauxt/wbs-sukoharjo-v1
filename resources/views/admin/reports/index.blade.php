@@ -60,7 +60,7 @@
                                 </span>
                             </td>
                             <td>
-                                {{ optional($report->followUp->modified_at)->format('d M Y H:i') ?? '-' }}
+                                {{ optional($report->followUp->updated_at)->format('d M Y H:i') ?? '-' }}
                             </td>
                             <td class="px-4 py-3">
                                 <a href="{{ route('admin.reports.show', $report->id) }}"

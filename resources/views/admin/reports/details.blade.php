@@ -12,10 +12,18 @@
                 <h3 class="text-lg font-semibold text-gray-700 mb-2">Informasi Laporan</h3>
                 <p><strong>Subjek:</strong> {{ $report->subject }}</p>
                 <p><strong>Tanggal Lapor:</strong> {{ $report->reported_at->format('d M Y H:i') }}</p>
-                <p><strong>Pelapor:</strong> {{ $report->informant->name ?? 'Anonim' }}</p>
+                <p><strong>Terlapor:</strong>
+                    <br>
+                <ul class="list-disc list-inside pl-4">
+                    @foreach ($report->reportedParties as $reported)
+                        <li>{{ $reported->reported_name }} - {{ $reported->reported_unit }}</li>
+                    @endforeach
+                </ul>
+                </p>
+                <p class="mt-2"><strong>Pelapor:</strong> {{ $report->informant->name ?? 'Anonim' }}</p>
                 <p><strong>Kategori:</strong> {{ $report->category->name ?? '-' }}</p>
                 <p><strong>Status:</strong> {{ $report->status->name }}</p>
-                <p><strong>Terakhir Diubah:</strong> {{ $report->followUp->modified_at->format('d M Y H:i') }} </p>
+                <p><strong>Terakhir Diubah:</strong> {{ $report->followUp->updated_at->format('d M Y H:i') }} </p>
                 <button type="button" id="followUpButton"
                     class="btn bg-blue-600 text-white rounded-md hover:bg-blue-800 text-sm mt-6">
                     Tindaklanjuti Laporan
@@ -32,10 +40,22 @@
                                     alt="{{ $attachment->file_name }}" class="w-48 h-48 object-cover rounded-md mb-2">
                             </a>
                         @else
-                            <a href="{{ asset('storage/' . $attachment->file_path) }}" target="_blank"
-                                class="text-blue-600 hover:underline">
-                                {{ $attachment->file_name }}
-                            </a><br />
+                            <div class="flex items-center space-x-2 mb-2">
+                                @if (Str::contains($attachment->file_type, 'pdf'))
+                                    <i class="fas fa-file-pdf text-red-500 text-2xl"></i>
+                                @elseif(Str::contains($attachment->file_type, 'word') || Str::endsWith($attachment->file_name, ['.doc', '.docx']))
+                                    <i class="fas fa-file-word text-blue-500 text-2xl"></i>
+                                @elseif(Str::contains($attachment->file_type, 'zip') || Str::endsWith($attachment->file_name, ['.zip', '.rar']))
+                                    <i class="fas fa-file-archive text-yellow-500 text-2xl"></i>
+                                @else
+                                    <i class="fas fa-file-alt text-gray-500 text-2xl"></i>
+                                @endif
+
+                                <a href="{{ asset('storage/' . $attachment->file_path) }}" target="_blank"
+                                    class="text-blue-600 hover:underline">
+                                    {{ $attachment->file_name }}
+                                </a>
+                            </div>
                         @endif
                     @endforeach
                 </div>

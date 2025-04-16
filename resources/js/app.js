@@ -137,6 +137,21 @@ document.addEventListener("DOMContentLoaded", function () {
             .classList.toggle("hidden", currentStep !== totalSteps);
     }
 
+    function checkFiles(input) {
+        const files = input.files;
+        if (files.length > 5) {
+            alert("Maksimal hanya boleh upload 5 file.");
+            input.value = ""; // Reset file input
+        }
+        for (let file of files) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert(`${file.name} melebihi 5MB.`);
+                input.value = "";
+                break;
+            }
+        }
+    }
+
     function updateSummary() {
         const get = (id) => document.getElementById(id);
 

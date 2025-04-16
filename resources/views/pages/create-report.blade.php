@@ -126,8 +126,9 @@
                             <legend class="fieldset-legend text-lg">Waktu Kejadian</legend>
                             <input type="datetime-local" name="datetime" id="datetime" class="input w-full" />
                             <legend class="fieldset-legend text-lg">Upload Bukti Pendukung</legend>
-                            <input type="file" name="evidence" class="input w-full" multiple/>
-                            <p class="fieldset-label mt-1">Format yang didukung: jpg, png, pdf. Maks 10 file</p>
+                            <input type="file" name="evidence[]" class="input w-full" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.zip" multiple/>
+                            <p class="fieldset-label mt-1"></p>
+                            <small>Format yang didukung: jpg, png, pdf. Maks 10 file. Maksimal 5MB per file</small>
                         </fieldset>
                     </div>
 
