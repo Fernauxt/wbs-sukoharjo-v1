@@ -35,13 +35,49 @@ class AdminReportController extends Controller
         return view('admin.reports.details', compact('report'));
     }
 
-    public function followUp(Request $request, $id)
+    public function update(Request $request, $id)
     {
+
+        // Validasi input
         $validated = $request->validate([
-            'status'
+            'status' => 'required|string|in:in-review,need-clarify,resolved',
+            'notes' => 'nullable|string',
+            'evidence' => 'sometimes|array|max:5',
+            'evidence.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,zip|max:5120',
         ]);
 
+        // Cari laporan berdasarkan ID
         $report = Report::findOrFail($id);
+
+        // Update status laporan
+        $status = Status::where('slug', $validated['status'])->firstOrFail();
+        $report->status_id = $status->id;
+        $report->save();
+
+        // Update atau buat data tindak lanjut
+        $followUp = $report->followUp()->updateOrCreate(
+            ['report_id' => $report->id],
+            [
+                'status_id' => $status->id,
+                'notes' => $validated['notes'] ?? null,
+            ]
+        );
+
+        // Proses file bukti pendukung jika ada
+        if ($request->hasFile('evidence')) {
+            foreach ($request->file('evidence') as $file) {
+                $path = $file->store('follow_up_attachments', 'public');
+                $followUp->attachments()->create([
+                    'file_name' => $file->getClientOriginalName(),
+                    'file_path' => $path,
+                    'file_type' => $file->getMimeType(),
+                ]);
+            }
+        }
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin.reports.show', $id)
+            ->with('success', 'Laporan berhasil diperbarui.');
     }
     
     

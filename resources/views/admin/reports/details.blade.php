@@ -71,7 +71,7 @@
         <div id="followUpModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
             <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 p-6">
                 <h2 class="text-xl font-bold mb-4">Tindaklanjuti Laporan</h2>
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.reports.update', $report->id) }}" enctype="multipart/form-data" >
                     @csrf
                     <!-- Radio Button -->
                     <fieldset class="mb-4">
@@ -88,7 +88,7 @@
                             </label>
                         </div>
                     </fieldset>
-
+                    
                     <!-- Textarea -->
                     <fieldset class="mb-4">
                         <legend class="text-lg font-semibold">Catatan</legend>
@@ -98,7 +98,7 @@
                     <!-- File Upload -->
                     <fieldset class="mb-4">
                         <legend class="text-lg font-semibold">Upload Bukti Pendukung</legend>
-                        <input type="file" name="evidence[]" class="input w-full" multiple>
+                        <input type="file" name="evidence[]" class="input w-full" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.zip" multiple>
                         <p class="text-sm text-gray-500 mt-1">Format yang didukung: jpg, png, pdf. Maks 10 file.</p>
                     </fieldset>
 

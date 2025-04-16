@@ -32,4 +32,5 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [AdminDashController::class, 'index'])->name('admin.dashboard');
     Route::get('/laporan', [AdminReportController::class, 'index'])->name('admin.reports.index');
     Route::get('/laporan/{id}', [AdminReportController::class, 'show'])->name('admin.reports.show');
+    Route::post('/laporan/{id}/update', [AdminReportController::class, 'update'])->name('admin.reports.update');
 });

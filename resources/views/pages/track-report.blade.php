@@ -62,21 +62,39 @@
                                 {{ \Carbon\Carbon::parse($report->followUp->modified_at)->format('d M Y, H:i') }}
                             </p>
 
-                            @if ($report->followUp->attachments && $report->followUp->attachments->count())
-                                <div class="mt-4">
-                                    <h4 class="text-lg font-medium">Lampiran:</h4>
-                                    <ul class="list-disc list-inside text-blue-700">
-                                        @foreach ($report->followUp->attachments as $file)
-                                            <li>
-                                                <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank"
-                                                    class="underline hover:text-blue-900">
-                                                    {{ $file->file_name }}
+                            {{-- filepath: d:\intern_skh\wbs-sukoharjo-v1\resources\views\pages\track-report.blade.php --}}
+                            <div class="mt-4">
+                                <h4 class="text-lg font-medium mb-2">Lampiran:</h4>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                    @foreach ($report->followUp->attachments as $file)
+                                        <div class="flex flex-col items-center">
+                                            @if (in_array(pathinfo($file->file_path, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
+                                                <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank">
+                                                    <img src="{{ asset('storage/' . $file->file_path) }}"
+                                                        alt="{{ $file->file_name }}"
+                                                        class="w-32 h-48 object-cover rounded-md shadow-md">
                                                 </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                            @else
+                                                <div class="flex flex-col items-center">
+                                                    @if (Str::contains($file->file_path, ['pdf']))
+                                                        <i class="fas fa-file-pdf text-red-500 text-4xl"></i>
+                                                    @elseif (Str::contains($file->file_path, ['doc', 'docx']))
+                                                        <i class="fas fa-file-word text-blue-500 text-4xl"></i>
+                                                    @elseif (Str::contains($file->file_path, ['zip', 'rar']))
+                                                        <i class="fas fa-file-archive text-yellow-500 text-4xl"></i>
+                                                    @else
+                                                        <i class="fas fa-file-alt text-gray-500 text-4xl"></i>
+                                                    @endif
+                                                    <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank"
+                                                        class="mt-2 text-sm underline hover:text-blue-900 text-center">
+                                                        {{ $file->file_name }}
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endforeach
                                 </div>
-                            @endif
+                            </div>
                         @else
                             <p class="text-lg text-gray-500 italic">Belum ada tindak lanjut pada laporan ini.</p>
                         @endif
