@@ -5,7 +5,7 @@
 @section('content')
     <div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded-lg shadow">
         <div class="flex justify-center mb-6">
-            <img src="{{ asset('images/logo-wbs.png') }}" alt="Logo WBS" class="h-16">
+            <img src="{{ asset('https://wbs.sukoharjokab.go.id/images/wbs.png') }}" alt="Logo WBS" class="h-16">
         </div>
 
         <h1 class="text-xl font-bold mb-4 text-center">Hai {{ $report->informant->name }}</h1>
@@ -23,7 +23,7 @@
             </div>
         @endif
 
-        @if(Route::has('track.report'))
+        @if(Route::has('report.track'))
             <p class="mt-6">Klik tombol berikut untuk melihat status laporan Anda secara lengkap:</p>
             <a href="{{ route('track.report', ['token' => $report->token]) }}"
                class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">

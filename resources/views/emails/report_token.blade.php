@@ -16,7 +16,7 @@
             {{ $report->token }}
         </div>
 
-        @if(Route::has('track.report'))
+        @if(Route::has('report.track'))
             <p class="mt-6">Untuk mengecek status laporan, klik tombol berikut:</p>
             <a href="{{ route('track.report', ['token' => $report->token]) }}"
                class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
