@@ -14,6 +14,8 @@ use Carbon\Carbon;
 use App\Models\Attachment;
 use App\Models\FollowUp;
 use App\Models\FollowUpAttachment;
+use App\Mail\ReportTokenMail;
+use Illuminate\Support\Facades\Mail;
 
 class ReportController extends Controller
 {
@@ -115,6 +117,9 @@ class ReportController extends Controller
                 ]);
             }
         }
+
+        // Kirim email ke informant
+        Mail::to($informant->email)->send(new ReportTokenMail($report));
 
         // Redirect ke halaman berhasil sambil membawa token
         return redirect()->route('report.success', ['token' => $token]);

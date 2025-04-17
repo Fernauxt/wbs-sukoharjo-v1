@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Report;
 use App\Models\Status;
 use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
+use App\Mail\ReportUpdateMail;
+use Illuminate\Support\Facades\Mail;
 
 class AdminReportController extends Controller
 {
@@ -74,6 +76,10 @@ class AdminReportController extends Controller
                 ]);
             }
         }
+
+        Mail::to($report->informant->email)->send(
+            new ReportUpdateMail($report, $validated['status'], $validated['notes'] ?? null)
+        );
 
         // Redirect dengan pesan sukses
         return redirect()->route('admin.reports.show', $id)
