@@ -47,8 +47,9 @@
 
                                 <legend class="fieldset-legend text-lg">Nomor Telepon</legend>
                                 <input name="phone" type="tel" id="phone" class="input w-full"
-                                    placeholder="Nomor Telepon" required />
+                                    placeholder="Nomor Telepon" pattern="^62[0-9]{9,}$" required />
                                 <p class="fieldset-label text-red-600 mt-1" id="teleponError"></p>
+                                <small>Nomor telepon harus dimulai dengan '62' dan memiliki minimal 9 digit setelahnya.</small>
                             </fieldset>
                         </div>
 

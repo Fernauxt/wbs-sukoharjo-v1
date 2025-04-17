@@ -16,6 +16,7 @@ use App\Models\FollowUp;
 use App\Models\FollowUpAttachment;
 use App\Mail\ReportTokenMail;
 use Illuminate\Support\Facades\Mail;
+use App\Services\WablasService;
 
 class ReportController extends Controller
 {
@@ -118,6 +119,10 @@ class ReportController extends Controller
             }
         }
 
+        // // Kirim notifikasi ke informant melalui WhatsApp
+        // $wa = new WablasService();
+        // $wa->send($informant->phone, "Halo {$informant->name}, laporan Anda telah diterima. Token pelaporan Anda adalah: {$report->token}. Simpan token ini untuk memantau status laporan Anda.");
+
         // Kirim email ke informant
         Mail::to($informant->email)->send(new ReportTokenMail($report));
 
@@ -134,6 +139,7 @@ class ReportController extends Controller
             'token' => $report->token,
         ]);
     }
+
 
     public function track(Request $request)
     {
@@ -154,5 +160,21 @@ class ReportController extends Controller
         }
 
         return view('pages.track-report', compact('report', 'error'));
+    }
+
+    public function trackByEmail(Request $request, $token)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $report = Report::with('reportedParties', 'status', 'followUp')
+            ->where('token', strtoupper($token))
+            ->where('email', $request->email)
+            ->first();
+
+        if (!$report) {
+            return redirect()->route('report.track')->with('error', true);
+        }
+
+        return view('pages.track-report', compact('report'));
     }
 }

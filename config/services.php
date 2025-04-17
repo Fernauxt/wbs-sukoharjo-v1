@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'wablas' => [
+        'api_key' => env('WABLAS_API_KEY'),
+        'device' => env('WABLAS_DEVICE'),
+    ],
 
 ];
