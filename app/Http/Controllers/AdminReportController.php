@@ -77,9 +77,12 @@ class AdminReportController extends Controller
             }
         }
 
-        Mail::to($report->informant->email)->send(
-            new ReportUpdateMail($report, $validated['status'], $validated['notes'] ?? null)
-        );
+        // Email notif ke pelapor (jika tanpa email, skip)
+        if ($report->informant->email) {
+            Mail::to($report->informant->email)->send(
+                new ReportUpdateMail($report, $validated['status'], $validated['notes'] ?? null)
+            );
+        }
 
         // Redirect dengan pesan sukses
         return redirect()->route('admin.reports.show', $id)

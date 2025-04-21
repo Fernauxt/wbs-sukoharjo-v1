@@ -24,7 +24,7 @@ Route::post('/pengaduan/kirim', [ReportController::class, 'store'])->name('repor
 Route::get('/pengaduan/sukses/{token}', [ReportController::class, 'success'])->name('report.success');
 
 Route::match(['get', 'post'], '/lacak-pengaduan', [ReportController::class, 'track'])->name('report.track');
-Route::match(['get', 'post'], '/lacak-pengaduan/{token}', [ReportController::class, 'trackByEmail'])->name('report.track.email');
+// Route::match(['get', 'post'], '/lacak-pengaduan/{token}', [ReportController::class, 'trackByEmail'])->name('report.track.email');
 
 
 // Route for admin (panel administrasi)

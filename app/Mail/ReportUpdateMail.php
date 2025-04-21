@@ -33,7 +33,7 @@ class ReportUpdateMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.report_update',
+            view: 'emails.report-update',
         );
     }
 

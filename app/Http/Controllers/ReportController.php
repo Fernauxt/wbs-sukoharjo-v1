@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\IncomingReportMail;
 use Illuminate\Http\Request;
 use App\Models\ReportCategory;
 use App\Models\Status;
@@ -16,7 +17,7 @@ use App\Models\FollowUp;
 use App\Models\FollowUpAttachment;
 use App\Mail\ReportTokenMail;
 use Illuminate\Support\Facades\Mail;
-use App\Services\WablasService;
+use App\Models\Admin;
 
 class ReportController extends Controller
 {
@@ -34,6 +35,8 @@ class ReportController extends Controller
     {
         // dd($request->all());
 
+        $admins = Admin::all();
+;
         // Validasi input
         $validated = $request->validate([
             'informant_name' => 'required|string|max:255',
@@ -124,7 +127,16 @@ class ReportController extends Controller
         // $wa->send($informant->phone, "Halo {$informant->name}, laporan Anda telah diterima. Token pelaporan Anda adalah: {$report->token}. Simpan token ini untuk memantau status laporan Anda.");
 
         // Kirim email ke informant
-        Mail::to($informant->email)->send(new ReportTokenMail($report));
+        if ($informant->email)
+        {
+            Mail::to($informant->email)->send(new ReportTokenMail($report));
+        }
+
+        // Kirim email ke admin
+        foreach ($admins as $admin) {
+            Mail::to($admin->email)->send(new IncomingReportMail($report, $admin));
+        }
+
 
         // Redirect ke halaman berhasil sambil membawa token
         return redirect()->route('report.success', ['token' => $token]);
@@ -162,19 +174,19 @@ class ReportController extends Controller
         return view('pages.track-report', compact('report', 'error'));
     }
 
-    public function trackByEmail(Request $request, $token)
-    {
-        $request->validate(['email' => 'required|email']);
+    // public function trackByEmail(Request $request, $token)
+    // {
+    //     $request->validate(['email' => 'required|email']);
 
-        $report = Report::with('reportedParties', 'status', 'followUp')
-            ->where('token', strtoupper($token))
-            ->where('email', $request->email)
-            ->first();
+    //     $report = Report::with('reportedParties', 'status', 'followUp')
+    //         ->where('token', strtoupper($token))
+    //         ->where('email', $request->email)
+    //         ->first();
 
-        if (!$report) {
-            return redirect()->route('report.track')->with('error', true);
-        }
+    //     if (!$report) {
+    //         return redirect()->route('report.track')->with('error', true);
+    //     }
 
-        return view('pages.track-report', compact('report'));
-    }
+    //     return view('pages.track-report', compact('report'));
+    // }
 }

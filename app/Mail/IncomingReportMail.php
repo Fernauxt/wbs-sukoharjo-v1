@@ -9,18 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ReportTokenMail extends Mailable
+class IncomingReportMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public $report;
 
-    public function __construct($report)
+    public $report;
+    public $admin;
+
+    public function __construct($report, $admin)
     {
         //
+        $this->admin = $admin;
         $this->report = $report;
     }
 
@@ -30,7 +33,7 @@ class ReportTokenMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Pengaduan Berhasil - '. $this->report->token,
+            subject: 'Laporan Baru Diterima - ' ,
         );
     }
 
@@ -40,7 +43,7 @@ class ReportTokenMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.report-token',
+            view: 'emails.incoming-report',
         );
     }
 
