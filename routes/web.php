@@ -6,7 +6,8 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashController;
 use App\Http\Controllers\AdminReportController;
 use Carbon\Carbon;
-use App\Models\Report;
+// use App\Models\Report;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReportTokenMail;
 
@@ -37,4 +38,18 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/laporan', [AdminReportController::class, 'index'])->name('admin.reports.index');
     Route::get('/laporan/{id}', [AdminReportController::class, 'show'])->name('admin.reports.show');
     Route::post('/laporan/{id}/update', [AdminReportController::class, 'update'])->name('admin.reports.update');
+});
+
+Route::get('/test-mail', function () {
+    $report = (object)[
+        'token' => Str::upper(Str::random(6)),
+        'created_at' => now()
+    ];
+
+    $report->informant = (object) [
+        'name' => 'Mike Kilo',
+    ];
+
+    Mail::to('mikekilo.416@gmail.com')->send(new ReportTokenMail($report));
+    return 'Email terkirim!';
 });

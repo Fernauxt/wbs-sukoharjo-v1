@@ -15,13 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('informant_id')->constrained('informants')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('report_categories')->onDelete('restrict');
-            $table->string('reported_name');
-            $table->string('reported_unit');
             $table->string('subject');
             $table->text('description');
             $table->string('location');
             $table->datetime('incident_time');
-            $table->json('attachments')->nullable();
             $table->foreignId('status_id')->constrained('statuses')->onDelete('restrict');
             $table->timestamp('reported_at');
         });

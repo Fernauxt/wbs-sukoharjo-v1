@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('report_id')->constrained()->onDelete('cascade');
             $table->text('notes')->nullable();
             $table->foreignId('status_id')->constrained('statuses')->onDelete('restrict');
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

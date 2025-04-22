@@ -16,8 +16,7 @@ return new class extends Migration
         $table->foreignId('report_id')->constrained('reports')->onDelete('cascade'); // Foreign key ke tabel reports
         $table->string('file_path');
         $table->string('file_type');
-        $table->string('original_name');
-        $table->text('description')->nullable();
+        $table->string('file_name');
         $table->timestamps();
     });
 }
