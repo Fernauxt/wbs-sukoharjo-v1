@@ -23,7 +23,7 @@
 
         <p class="mt-4 mb-2 font-semibold">Tanggal Laporan:</p>
         <div class="text-sm bg-gray-100 p-3 rounded border border-gray-200">
-            {{ $report->reported_at->format('d M Y H:i') }}
+            {{ $report->reported_at ? $report->reported_at->format('d-m-Y H:i') : 'Tanggal tidak tersedia' }}
         </div>
 
         <p class="mt-4 mb-2 font-semibold">Token Laporan:</p>

@@ -47,9 +47,9 @@
 
                                 <legend class="fieldset-legend text-lg">Nomor Telepon</legend>
                                 <input name="phone" type="tel" id="phone" class="input w-full"
-                                    placeholder="Nomor Telepon" pattern="^62[0-9]{9,}$" required />
+                                    placeholder="Nomor Telepon" />
                                 <p class="fieldset-label text-red-600 mt-1" id="teleponError"></p>
-                                <small>Nomor telepon harus dimulai dengan '62' dan memiliki minimal 9 digit setelahnya.</small>
+                                <small>Pastikan nomor telepon aktif dan dapat dihubungi</small>
                             </fieldset>
                         </div>
 
@@ -156,6 +156,17 @@
                         <button type="submit" id="submitButton"
                             class="btn bg-blue-600 hover:bg-blue-800 btn-lg text-white font-bold rounded-lg hidden">Kirim
                             Laporan</button>
+                    </div>
+                </div>
+
+                <!-- Modal for Missing Required Inputs -->
+                <div id="inputKosongModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div class="modal-box bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-bold mb-4">Form Tidak Lengkap</h3>
+                        <p class="text-gray-700 mb-4">Harap isi semua kolom yang wajib diisi sebelum melanjutkan ke langkah berikutnya.</p>
+                        <button id="closeModalButton" class="btn bg-red-600 hover:bg-red-800 text-white font-bold rounded-lg px-4 py-2">
+                            Tutup
+                        </button>
                     </div>
                 </div>
             </div>

@@ -76,15 +76,40 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
 
     form.addEventListener("keydown", function (e) {
-        console.log("Keydown detected:", e.key, "Current Step:", currentStep);
-        if (e.key === "Enter" && currentStep !== totalSteps) {
-            e.preventDefault();
-            console.log("Enter prevented");
+        if (e.key === "Enter") {
+            e.preventDefault(); // Prevent default form submission
+            if (handleStepValidation() && currentStep < totalSteps) {
+                document
+                    .getElementById(`step${currentStep}`)
+                    .classList.add("hidden");
+                currentStep++;
+                document
+                    .getElementById(`step${currentStep}`)
+                    .classList.remove("hidden");
+                updateSteps();
+                updateButtons();
+
+                if (currentStep === totalSteps) {
+                    updateSummary();
+                }
+            }
+        } else if (e.key === "Escape") {
+            if (currentStep > 1) {
+                document
+                    .getElementById(`step${currentStep}`)
+                    .classList.add("hidden");
+                currentStep--;
+                document
+                    .getElementById(`step${currentStep}`)
+                    .classList.remove("hidden");
+                updateSteps();
+                updateButtons();
+            }
         }
     });
 
     document.getElementById("nextButton").addEventListener("click", () => {
-        if (currentStep < totalSteps) {
+        if (handleStepValidation() && currentStep < totalSteps) {
             document
                 .getElementById(`step${currentStep}`)
                 .classList.add("hidden");
@@ -100,6 +125,30 @@ document.addEventListener("DOMContentLoaded", function () {
             updateSummary();
         }
     });
+
+    function handleStepValidation() {
+        // Check if required inputs are filled
+        const requiredInputs = document.querySelectorAll(
+            `#step${currentStep} [required]`
+        );
+        let allFilled = true;
+
+        requiredInputs.forEach((input) => {
+            if (!input.value.trim()) {
+                allFilled = false;
+                input.classList.add("border-red-500"); // Highlight empty fields
+            } else {
+                input.classList.remove("border-red-500");
+            }
+        });
+
+        if (!allFilled) {
+            alert("Harap lengkapi semua data yang wajib diisi!");
+            return false;
+        }
+
+        return true;
+    }
 
     document.getElementById("prevButton").addEventListener("click", () => {
         if (currentStep > 1) {

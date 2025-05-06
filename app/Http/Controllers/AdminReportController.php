@@ -14,7 +14,7 @@ class AdminReportController extends Controller
     //
     public function index(Request $request)
     {
-        $statuses = Status::all(); // Assuming you have a Status model
+        $statuses = Status::all();
         $query = Report::query();
 
         // Apply filter if 'status' is provided
