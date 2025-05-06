@@ -5,8 +5,8 @@
 @section('content')
     <div class="flex justify-center items-center h-screen">
         <!-- Left: Image -->
-        <div class="w-3/4 h-screen hidden lg:block">
-            <img src=""
+        <div class="h-screen lg:w-1/2 hidden lg:block relative">
+            <img src="https://img.freepik.com/free-vector/flat-customer-service-week-illustration_23-2149644201.jpg?t=st=1746502649~exp=1746506249~hmac=1ced3c2d0b1dec13415be52d46db54069bd243ff06fb84a471e87ae35c58e143&w=740"
                 alt="Placeholder Image" class="object-cover w-full h-full">
         </div>
 
