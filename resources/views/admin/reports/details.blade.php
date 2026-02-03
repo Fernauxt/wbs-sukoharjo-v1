@@ -82,13 +82,16 @@
                         <legend class="text-lg font-semibold">Status Tindak Lanjut</legend>
                         <div class="flex items-center space-x-4">
                             <label>
-                                <input type="radio" name="status" value="in-review" class="mr-2"> Ditinjau
+                                <input type="radio" name="status" value="diproses" class="mr-2"> Ditinjau (Proses)
                             </label>
                             <label>
-                                <input type="radio" name="status" value="need-clarify" class="mr-2"> Perlu Klarifikasi
+                                <input type="radio" name="status" value="perlu-klarifikasi" class="mr-2"> Perlu Klarifikasi
                             </label>
                             <label>
-                                <input type="radio" name="status" value="resolved" class="mr-2"> Selesai
+                                <input type="radio" name="status" value="selesai" class="mr-2"> Selesai
+                            </label>
+                            <label>
+                                <input type="radio" name="status" value="ditolak" class="mr-2"> Tolak
                             </label>
                         </div>
                     </fieldset>

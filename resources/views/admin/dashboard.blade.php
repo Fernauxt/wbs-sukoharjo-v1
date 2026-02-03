@@ -5,11 +5,11 @@
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Card: Total Laporan -->
-        <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-red-50 hover:scale-[1.02]">
-            <i class="fas fa-file-alt text-4xl text-red-600"></i>
+        <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-gray-50 hover:scale-[1.02]">
+            <i class="fas fa-file-alt text-4xl text-black-600"></i>
             <div>
                 <h3 class="text-sm text-gray-500">Total Laporan</h3>
-                <p class="text-3xl font-bold text-red-600 mt-1">{{ $totalReports }}</p>
+                <p class="text-3xl font-bold text-black-600 mt-1">{{ $totalReports }}</p>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
         <!-- Card: Laporan Butuh Klarifikasi -->
         <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-orange-50 hover:scale-[1.02]">
             <i class="fas fa-question-circle text-4xl text-orange-500"></i>
@@ -48,6 +48,15 @@
             <div>
                 <h3 class="text-sm text-gray-500">Selesai</h3>
                 <p class="text-3xl font-bold text-green-600 mt-1">{{ $completedReports }}</p>
+            </div>
+        </div>
+
+        <!-- Card: Laporan Selesai -->
+        <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-red-50 hover:scale-[1.02]">
+            <i class="fas fa-ban text-4xl text-red-600"></i>
+            <div>
+                <h3 class="text-sm text-gray-500">Ditolak</h3>
+                <p class="text-3xl font-bold text-red-600 mt-1">{{ $deniedReports }}</p>
             </div>
         </div>
     </div>

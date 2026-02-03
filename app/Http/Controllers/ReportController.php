@@ -52,7 +52,7 @@ class ReportController extends Controller
             'violation_subject' => 'required|string|max:255',
             'violation_desc' => 'required|string',
             'location' => 'required|string|max:255',
-            'datetime' => 'required|date_format:Y-m-d\TH:i',
+            'datetime' => 'required|date',
 
             'evidence' => 'nullable|array|max:5',
             'evidence.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,zip|max:5120',
@@ -84,6 +84,7 @@ class ReportController extends Controller
             'location' => $validated['location'],
             'incident_time' => Carbon::parse($validated['datetime']),
             'status_id' => 1, // Default "Terkirim"
+            'reported_at' => now(),
         ]);
 
         $followups = FollowUp::create([
@@ -92,12 +93,12 @@ class ReportController extends Controller
             'notes' => 'Laporan telah berhasil dikirim dan sedang menunggu verifikasi.',
         ]);
 
-        FollowUpAttachment::create([
-            'follow_up_id' => $followups->id,
-            'file_path' => null,
-            'file_name' => null,
-            'file_type' => null,
-        ]);
+        // FollowUpAttachment::create([
+        //     'follow_up_id' => $followups->id,
+        //     'file_path' => null,
+        //     'file_name' => null,
+        //     'file_type' => null,
+        // ]);
 
         // Simpan data terlapor
         foreach ($validated['reported_name'] as $i => $name) {

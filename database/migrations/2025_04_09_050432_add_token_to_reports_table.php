@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('reports', function (Blueprint $table) {
             //
-            $table->uuid('token')->after('id')->unique()->default(null)->comment('Token for report access');
+            $table->string('token', 10)->unique()->after('id');
         });
     }
 

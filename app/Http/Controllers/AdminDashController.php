@@ -16,13 +16,15 @@ class AdminDashController extends Controller
         $inProgressReports = Report::where('status_id', 2)->count();
         $needClarifyReports = Report::where('status_id', 3)->count();
         $completedReports = Report::where('status_id', 4)->count();
+        $deniedReports = Report::where('status_id', 5)->count();
 
         return view('admin.dashboard', compact(
             'totalReports',
             'sentReports',
             'inProgressReports',
             'needClarifyReports',
-            'completedReports'
+            'completedReports',
+            'deniedReports'
         ));
     }
 }

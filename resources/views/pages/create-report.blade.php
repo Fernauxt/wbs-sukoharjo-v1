@@ -3,6 +3,15 @@
 @section('title', 'Pengaduan')
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" id="form-laporan" action="{{ route('report.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="bg-base-200 min-h-screen">
@@ -113,7 +122,7 @@
 
                             <!-- Deskripsi Pelanggaran -->
                             <legend class="fieldset-legend text-lg">Deskripsi Pelanggaran</legend>
-                            <textarea class="textarea w-full h-64" name="violation_desc" placeholder="Jelaskan secara rinci"></textarea>
+                            <textarea class="textarea w-full h-64" name="violation_desc" placeholder="Jelaskan secara rinci" required></textarea>
                         </fieldset>
                     </div>
 

@@ -42,12 +42,12 @@ class AdminReportController extends Controller
 
         // Validasi input
         $validated = $request->validate([
-            'status' => 'required|string|in:in-review,need-clarify,resolved',
+            'status' => 'required|string|in:diproses,perlu-klarifikasi,selesai,ditolak', 
             'notes' => 'nullable|string',
             'evidence' => 'sometimes|array|max:5',
             'evidence.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,zip|max:5120',
         ]);
-
+        
         // Cari laporan berdasarkan ID
         $report = Report::findOrFail($id);
 

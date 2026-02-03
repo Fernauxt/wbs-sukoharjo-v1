@@ -28,7 +28,7 @@
 
 <div class="hero min-h-screen bg-base-100">
     <div class="hero-content flex-col lg:flex-row-reverse lg:text-justify items-center text-center">
-        <img src="https://wbs.sukoharjokab.go.id/images/wb.png" class="max-w-xs lg:max-w-md rounded-lg"
+        <img src="https://wbs.sukoharjokab.go.id/images/wbs.png" class="max-w-xs lg:max-w-md rounded-lg"
             data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000" />
         <div data-aos="fade-right" data-aos-delay="300" data-aos-duration="1000">
             <h1 class="text-5xl lg:text-7xl font-semibold font-cursive text-red-600">Definisi WBS?</h1>

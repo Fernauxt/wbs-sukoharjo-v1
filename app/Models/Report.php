@@ -18,6 +18,7 @@ class Report extends Model
         'location',
         'incident_time',
         'status_id',
+        'reported_at',
     ];
 
     protected $casts = [
