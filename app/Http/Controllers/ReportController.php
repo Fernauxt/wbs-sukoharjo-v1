@@ -36,8 +36,8 @@ class ReportController extends Controller
         // dd($request->all());
 
         $admins = Admin::all();
-        
-        // Validate input
+;
+        // Validasi input
         $validated = $request->validate([
             'informant_name' => 'required|string|max:255',
             'informant_type_id' => 'required|exists:informant_types,id',
@@ -59,7 +59,8 @@ class ReportController extends Controller
         ]);
 
     
-        // Save informant
+
+        // Simpan informant
         $informant = Informant::create([
             'name' => $validated['informant_name'],
             'email' => $validated['email'] ?? null,
@@ -73,13 +74,7 @@ class ReportController extends Controller
             $token = Str::upper(Str::random(6));
         } while (Report::where('token', $token)->exists());
 
-        // --- BAGIAN YANG DIUBAH (Mencari ID Status secara Dinamis) ---
-        $statusAwal = Status::where('name', 'Terkirim')->first();
-        // Jika status 'Terkirim' ketemu, pakai ID-nya. Jika tidak, pakai ID 1.
-        $statusId = $statusAwal ? $statusAwal->id : 1; 
-        // -------------------------------------------------------------
-
-        // Save report
+        // Simpan report
         $report = Report::create([
             'token' => $token,
             'informant_id' => $informant->id,
@@ -88,17 +83,23 @@ class ReportController extends Controller
             'description' => $validated['violation_desc'],
             'location' => $validated['location'],
             'incident_time' => Carbon::parse($validated['datetime']),
-            'status_id' => $statusId,
-            'reported_at' => Carbon::now(),
+            'status_id' => 1, // Default "Terkirim"
         ]);
 
         $followups = FollowUp::create([
             'report_id' => $report->id,
-            'status_id' => $statusId,
+            'status_id' => 1, // Default "Terkirim"
             'notes' => 'Laporan telah berhasil dikirim dan sedang menunggu verifikasi.',
         ]);
 
-        // Save reported parties
+        FollowUpAttachment::create([
+            'follow_up_id' => $followups->id,
+            'file_path' => null,
+            'file_name' => null,
+            'file_type' => null,
+        ]);
+
+        // Simpan data terlapor
         foreach ($validated['reported_name'] as $i => $name) {
             ReportedParty::create([
                 'report_id' => $report->id,
@@ -107,7 +108,7 @@ class ReportController extends Controller
             ]);
         }
 
-        // Save attachments if there are any
+        // Simpan attachment (jika ada)
         if ($request->hasFile('evidence')) {
             foreach ($request->file('evidence') as $file) {
                 $path = $file->store('attachments', 'public');
@@ -121,22 +122,27 @@ class ReportController extends Controller
             }
         }
 
-        // Send email to informant
+        // // Kirim notifikasi ke informant melalui WhatsApp
+        // $wa = new WablasService();
+        // $wa->send($informant->phone, "Halo {$informant->name}, laporan Anda telah diterima. Token pelaporan Anda adalah: {$report->token}. Simpan token ini untuk memantau status laporan Anda.");
+
+        // Kirim email ke informant
         if ($informant->email)
         {
             Mail::to($informant->email)->send(new ReportTokenMail($report));
         }
 
-        // Send email to all admins
+        // Kirim email ke admin
         foreach ($admins as $admin) {
             Mail::to($admin->email)->send(new IncomingReportMail($report, $admin));
         }
 
-        // Redirect to success page with token
+
+        // Redirect ke halaman berhasil sambil membawa token
         return redirect()->route('report.success', ['token' => $token]);
     }
 
-    // Success page after report submission
+    // Halaman setelah berhasil kirim laporan
     public function success($token)
     {
         $report = Report::where('token', $token)->firstOrFail();
@@ -149,6 +155,7 @@ class ReportController extends Controller
 
     public function track(Request $request)
     {
+        // return view('pages.track-report');
         $report = null;
         $error = false;
 
@@ -166,4 +173,20 @@ class ReportController extends Controller
 
         return view('pages.track-report', compact('report', 'error'));
     }
+
+    // public function trackByEmail(Request $request, $token)
+    // {
+    //     $request->validate(['email' => 'required|email']);
+
+    //     $report = Report::with('reportedParties', 'status', 'followUp')
+    //         ->where('token', strtoupper($token))
+    //         ->where('email', $request->email)
+    //         ->first();
+
+    //     if (!$report) {
+    //         return redirect()->route('report.track')->with('error', true);
+    //     }
+
+    //     return view('pages.track-report', compact('report'));
+    // }
 }

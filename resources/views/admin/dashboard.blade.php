@@ -9,7 +9,7 @@
             <i class="fas fa-file-alt text-4xl text-red-600"></i>
             <div>
                 <h3 class="text-sm text-gray-500">Total Laporan</h3>
-                <p class="text-3xl font-bold text-red-600 mt-1">{{ $stats['totalReports'] }}</p>
+                <p class="text-3xl font-bold text-red-600 mt-1">{{ $totalReports }}</p>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
             <i class="fas fa-paper-plane text-4xl text-blue-600"></i>
             <div>
                 <h3 class="text-sm text-gray-500">Terkirim</h3>
-                <p class="text-3xl font-bold text-blue-600 mt-1">{{ $stats['sentReports'] }}</p>
+                <p class="text-3xl font-bold text-blue-600 mt-1">{{ $sentReports }}</p>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
             <i class="fas fa-spinner text-4xl text-yellow-500 animate-spin"></i>
             <div>
                 <h3 class="text-sm text-gray-500">Diproses</h3>
-                <p class="text-3xl font-bold text-yellow-500 mt-1">{{ $stats['inProgressReports'] }}</p>
+                <p class="text-3xl font-bold text-yellow-500 mt-1">{{ $inProgressReports }}</p>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
             <i class="fas fa-question-circle text-4xl text-orange-500"></i>
             <div>
                 <h3 class="text-sm text-gray-500">Butuh Klarifikasi</h3>
-                <p class="text-3xl font-bold text-orange-500 mt-1">{{ $stats['needClarifyReports'] }}</p>
+                <p class="text-3xl font-bold text-orange-500 mt-1">{{ $needClarifyReports }}</p>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
             <i class="fas fa-check-circle text-4xl text-green-600"></i>
             <div>
                 <h3 class="text-sm text-gray-500">Selesai</h3>
-                <p class="text-3xl font-bold text-green-600 mt-1">{{ $stats['completedReports'] }}</p>
+                <p class="text-3xl font-bold text-green-600 mt-1">{{ $completedReports }}</p>
             </div>
         </div>
     </div>

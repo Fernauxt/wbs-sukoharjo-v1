@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('color'); // new column for badge color
-            // $table->string('slug'); unused
+            $table->string('slug');
             $table->timestamps();
         });
     }

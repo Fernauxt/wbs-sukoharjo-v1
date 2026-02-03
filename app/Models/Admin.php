@@ -2,26 +2,9 @@
 
 namespace App\Models;
 
-// Switching from Model to Authenticatable for admin authentication
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Authenticatable
+class Admin extends Model
 {
-    use Notifiable;
-
-    // Define the table associated with the model
-    protected $table = 'admins';
-
-    protected $fillable = [
-        'name',
-        'email',
-        'username',
-        'password',
-    ];
-
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    //
 }

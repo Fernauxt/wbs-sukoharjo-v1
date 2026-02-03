@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('report_categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->timestamps();
+        Schema::table('reports', function (Blueprint $table) {
+            //
+            $table->uuid('token')->after('id')->unique()->default(null)->comment('Token for report access');
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('report_categories');
+        Schema::table('reports', function (Blueprint $table) {
+            $table->dropColumn('token');
+        });
     }
 };

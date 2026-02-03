@@ -4,21 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use Illuminate\Http\Request;
+use App\Mpdels\Status;
 
 class AdminDashController extends Controller
 {
     //
     public function index()
     {
-        $stats = [
-            'totalReports' => Report::count(),
-            'sentReports' => Report::whereHas('status', fn($q) => $q->where('name', 'Terkirim'))->count(),
-            'inProgressReports' => Report::whereHas('status', fn($q) => $q->where('name', 'Diproses'))->count(),
-            'needClarifyReports' => Report::whereHas('status', fn($q) => $q->where('name', 'Diverifikasi'))->count(),
-            'completedReports' => Report::whereHas('status', fn($q) => $q->where('name', 'Selesai'))->count(),
-            'rejectedReports' => Report::whereHas('status', fn($q) => $q->where('name', 'Ditolak'))->count(),
-        ];
+        $totalReports = Report::count();
+        $sentReports = Report::where('status_id', 1)->count();
+        $inProgressReports = Report::where('status_id', 2)->count();
+        $needClarifyReports = Report::where('status_id', 3)->count();
+        $completedReports = Report::where('status_id', 4)->count();
 
-        return view('admin.dashboard', compact('stats'));
+        return view('admin.dashboard', compact(
+            'totalReports',
+            'sentReports',
+            'inProgressReports',
+            'needClarifyReports',
+            'completedReports'
+        ));
     }
 }
