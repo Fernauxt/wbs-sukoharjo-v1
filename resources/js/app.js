@@ -46,8 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
             contactFields.classList.add("opacity-100", "scale-100");
 
             // Fungsi aktivasi input
-            if (emailInput) emailInput.disabled = false;
-            if (phoneInput) phoneInput.disabled = false;
+            if (emailInput) {
+                emailInput.disabled = false;
+                emailInput.setAttribute("required", "");
+            }
+            if (phoneInput) {
+                phoneInput.disabled = false;
+                phoneInput.setAttribute("required", "");
+            }
 
             // Sembunyikan info pengganti
             infoFields.classList.replace("opacity-100", "opacity-0");
@@ -59,8 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
             infoFields.classList.add("opacity-100", "scale-100");
 
             // Fungsi non-aktivasi input
-            if (emailInput) emailInput.disabled = true;
-            if (phoneInput) phoneInput.disabled = true;
+            if (emailInput) {
+                emailInput.disabled = true;
+                emailInput.removeAttribute("required");
+            }
+            if (phoneInput) {
+                phoneInput.disabled = true;
+                phoneInput.removeAttribute("required");
+            }
 
             // Sembunyikan form email & telepon
             contactFields.classList.replace("opacity-100", "opacity-0");

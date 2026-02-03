@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->string('token', 10)->unique();
             $table->foreignId('informant_id')->constrained('informants')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('report_categories')->onDelete('restrict');
             $table->string('subject');
@@ -20,7 +21,8 @@ return new class extends Migration
             $table->string('location');
             $table->datetime('incident_time');
             $table->foreignId('status_id')->constrained('statuses')->onDelete('restrict');
-            $table->timestamp('reported_at');
+            $table->timestamp('reported_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

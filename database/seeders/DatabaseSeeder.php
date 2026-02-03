@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Status;
+use App\Models\ReportCategory;
+use App\Models\InformantType;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(AdminSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Status::insertOrIgnore([
+            ['id' => 1, 'name' => 'Terkirim', 'color' => 'secondary'],
+            ['id' => 2, 'name' => 'Diverifikasi', 'color' => 'info'],
+            ['id' => 3, 'name' => 'Diproses', 'color' => 'warning'],
+            ['id' => 4, 'name' => 'Selesai', 'color' => 'success'],
+            ['id' => 5, 'name' => 'Ditolak', 'color' => 'danger'],
+        ]);
+
+        ReportCategory::insertOrIgnore([
+            ['name' => 'Pelanggaran Disiplin PNS'],
+            ['name' => 'Korupsi / Pungli'],
+            ['name' => 'Penyalahgunaan Wewenang'],
+            ['name' => 'Pelayanan Publik Buruk'],
+            ['name' => 'Lainnya'],
+        ]);
+
+        InformantType::insertOrIgnore([
+            ['name' => 'Masyarakat Umum'],
+            ['name' => 'PNS / ASN'],
+            ['name' => 'Pegawai Swasta'],
         ]);
     }
 }

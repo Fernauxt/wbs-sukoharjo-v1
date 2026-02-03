@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Report extends Model
 {
+    const CREATED_AT = 'reported_at';
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'token',
         'informant_id',
@@ -18,13 +21,13 @@ class Report extends Model
         'location',
         'incident_time',
         'status_id',
+        'reported_at',
     ];
 
     protected $casts = [
         'reported_at' => 'datetime',
+        'incident_time' => 'datetime',
     ];
-
-    public $timestamps = false; // karena pakai reported_at sebagai timestamp
 
     // Relasi ke Informant
     public function informant(): BelongsTo
