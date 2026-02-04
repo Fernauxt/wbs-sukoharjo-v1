@@ -15,8 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(AdminSeeder::class);
-
+        // Seed foundational data first
         if (Status::count() == 0) {
             Status::insert([
                 ['name' => 'Terkirim', 'slug' => 'terkirim', 'created_at' => now(), 'updated_at' => now()],
@@ -33,6 +32,8 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'Korupsi / Pungli', 'slug' => 'korupsi-pungli', 'created_at' => now(), 'updated_at' => now()],
                 ['name' => 'Pelanggaran Disiplin', 'slug' => 'pelanggaran-disiplin', 'created_at' => now(), 'updated_at' => now()],
                 ['name' => 'Gratifikasi', 'slug' => 'gratifikasi', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'Tindak Pidana', 'slug' => 'pidana', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'Pelecehan Seksual', 'slug' => 'pelecehan', 'created_at' => now(), 'updated_at' => now()],
             ]);
         }
 
@@ -42,5 +43,9 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'ASN / Pegawai', 'created_at' => now(), 'updated_at' => now()],
             ]);
         }
+
+        // Then call seeders that depend on foundational data
+        $this->call(AdminSeeder::class);
+        $this->call(ReportSeeder::class);
     }
 }
