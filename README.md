@@ -1,66 +1,135 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Whistleblowing System (WBS) - Sukoharjo Regency
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Language](https://img.shields.io/badge/Lang-Indonesian-red)](README.id.md) [![Language](https://img.shields.io/badge/Lang-English-blue)](README.md)
 
-## About Laravel
+> **[🇮🇩 Baca Versi Bahasa Indonesia di sini](README.id.md)**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+A reporting system designed to ensure transparency and reporter security.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Project Context:**
+This project is a **re-development of a system originally created during an internship program**. The primary focus of this iteration is the infrastructure migration from **MySQL to PostgreSQL** and upgrading the framework to **Laravel 12** to enhance performance and data integrity.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ⚠️ Development Notes & Known Limitations
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+As an active portfolio project currently under development, please note the following technical conditions:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1.  **Desktop-First UI:**
+    * The User Interface (UI) is currently optimized for **Desktop/Laptop** screens.
+    * Mobile responsiveness (smartphones/tablets) is still in progress and may require further CSS adjustments.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2.  **Database Migration Status:**
+    * This project was recently migrated from **MySQL to PostgreSQL** (Strict Mode).
+    * Some status slugs in the database still use Indonesian terms (e.g., `diproses`, `selesai`) to maintain compatibility with legacy data, while the codebase uses English variable naming. This will be standardized in version 2 (v2).
 
-## Laravel Sponsors
+3.  **Notification Features:**
+    * The WhatsApp notification feature (via WablasService) is currently **disabled/commented out** in the controller and has been fully replaced by Email Notifications (SMTP).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🚀 Key Features
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 🔒 For Reporters (Public)
+* **Guaranteed Anonymity:** Reporters are not required to disclose personal identity.
+* **Tracking System:** Uses a **Unique 6-Character Token** (e.g., `A1B2C3`) to track report status without logging in.
+* **Secure Evidence:** Supports file attachments (Images, PDF, DOCX) securely stored in `storage/private`.
+* **Email Notifications:** Automatic status updates sent to the reporter's email (if provided).
 
-## Contributing
+### 🛡️ For Admins
+* **Statistical Dashboard:** Visual summary of reports based on categories and status.
+* **Report Management:** Update report status (In Review, Needs Clarification, Resolved).
+* **Follow-up System:** Add internal notes and upload follow-up evidence.
+* **Strict Validation:** Server-side validation to prevent spam or incomplete data submission.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 📸 Application Preview
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Landing Page | Reporting Form |
+| :---: | :---: |
+| ![Landing Page](public/screenshots/home-wbs.png) | ![Reporting Form](public/screenshots/report-wbs.png) |
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Admin Dashboard | Tracking System |
+| :---: | :---: |
+| ![Admin Dashboard](public/screenshots/home-admin-wbs.png) | ![Tracking Report](public/screenshots/track-report-wbs.png) |
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🛠️ Tech Stack
+
+* **Backend:** Laravel 12.x
+* **Database:** PostgreSQL (Strict Mode)
+* **Frontend:** Blade Templates + Tailwind CSS
+* **Security:** CSRF Protection, Encrypted Sessions, Secure File Storage
+
+---
+
+## 📥 Installation Guide (Local Development)
+
+Follow these steps to run the project locally:
+
+### 1. Prerequisites
+Ensure you have the following installed:
+* PHP >= 8.2
+* Composer
+* PostgreSQL
+* Node.js & NPM
+
+### 2. Clone & Install
+```bash
+# Clone repository
+git clone [https://github.com/your-username/wbs-sukoharjo-v1.git](https://github.com/your-username/wbs-sukoharjo-v1.git)
+cd wbs-sukoharjo-v1
+
+# Install PHP & JS dependencies
+composer install
+npm install
+```
+
+### 3. Environment Configuration
+Copy .env.example to .env and configure your PostgreSQL connection:
+```bash
+cp .env.example .env
+```
+Edit .env
+```ini,toml
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=wbs_sukoharjo
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+```
+
+### 4. Database Setup
+Generate app key, link storage and run migration/seeders (essential for initial data):
+```bash
+php artisan key:generate
+php artisan storage:link
+php artisan migrate:fresh --seed
+```
+
+### 5. Run Application
+Open two separate terminals to run the Laravel server and build frontend assets
+```bash
+# Terminal 1
+npm run dev
+
+# Terminal 2
+php artisan serve
+```
+
+---
+
+## 🔑 Demo Account (Default)
+If you ran the --seed command, use the following credentials to access the Admin Panel:
+* **URL:** /admin
+* **Username | Password :** admin | admin
+
+---
+
+## 👨‍💻 Author
+Developed by **Mieke** as part of a Full-Stack Web Development portfolio.

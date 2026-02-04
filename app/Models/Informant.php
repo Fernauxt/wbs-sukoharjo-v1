@@ -18,7 +18,7 @@ class Informant extends Model
         'type_id',
     ];
 
-    // Relasi ke tipe informan (ASN/Masyarakat)
+    // Relation to InformantType table
     public function type(): BelongsTo
     {
         return $this->belongsTo(InformantType::class, 'type_id');

@@ -30,17 +30,17 @@ class AdminReportController extends Controller
 
     public function show($id)
     {
-        // Ambil laporan berdasarkan ID
+        // Fetch report by ID
         $report = Report::findOrFail($id);
 
-        // Kembalikan view dengan data laporan
+        // Return view with report details
         return view('admin.reports.details', compact('report'));
     }
 
     public function update(Request $request, $id)
     {
 
-        // Validasi input
+        // Input validation
         $validated = $request->validate([
             'status' => 'required|string|in:diproses,perlu-klarifikasi,selesai,ditolak', 
             'notes' => 'nullable|string',
@@ -48,15 +48,15 @@ class AdminReportController extends Controller
             'evidence.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,zip|max:5120',
         ]);
         
-        // Cari laporan berdasarkan ID
+        // Search by ID
         $report = Report::findOrFail($id);
 
-        // Update status laporan
+        // Update report status
         $status = Status::where('slug', $validated['status'])->firstOrFail();
         $report->status_id = $status->id;
         $report->save();
 
-        // Update atau buat data tindak lanjut
+        // Update or create follow-up record
         $followUp = $report->followUp()->updateOrCreate(
             ['report_id' => $report->id],
             [
@@ -65,7 +65,7 @@ class AdminReportController extends Controller
             ]
         );
 
-        // Proses file bukti pendukung jika ada
+        // Handle evidence file if uploaded
         if ($request->hasFile('evidence')) {
             foreach ($request->file('evidence') as $file) {
                 $path = $file->store('follow_up_attachments', 'public');
@@ -77,14 +77,14 @@ class AdminReportController extends Controller
             }
         }
 
-        // Email notif ke pelapor (jika tanpa email, skip)
+        // Notify informant via email if email exists
         if ($report->informant->email) {
             Mail::to($report->informant->email)->send(
                 new ReportUpdateMail($report, $validated['status'], $validated['notes'] ?? null)
             );
         }
 
-        // Redirect dengan pesan sukses
+        // Redirect to report details with success message
         return redirect()->route('admin.reports.show', $id)
             ->with('success', 'Laporan berhasil diperbarui.');
     }

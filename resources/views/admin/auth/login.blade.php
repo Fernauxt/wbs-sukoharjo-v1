@@ -52,7 +52,7 @@
                 </button>
             </form>
 
-            <!-- Info bawah -->
+            <!-- Info -->
             <div class="mt-6 text-center text-gray-600">
                 Login hanya untuk petugas. Hubungi pengelola jika butuh akses.
             </div>

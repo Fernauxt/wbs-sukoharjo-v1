@@ -14,7 +14,7 @@
             </a>
         </div>
 
-        <!--- General Informasi --->
+        <!--- General Info --->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-6">
             <div class="bg-gray-50 p-3 sm:p-4 lg:p-4 rounded-lg shadow">
                 <h3 class="text-base sm:text-lg lg:text-lg font-semibold text-gray-700 mb-2 sm:mb-3">Informasi Laporan</h3>
@@ -120,7 +120,7 @@
                         <p class="text-xs sm:text-xs lg:text-xs text-gray-500 mt-1">Format yang didukung: jpg, png, pdf. Maks 10 file.</p>
                     </fieldset>
 
-                    <!-- Tombol -->
+                    <!-- Buttons -->
                     <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 justify-end">
                         <button type="button" id="closeModalButton"
                             class="btn bg-gray-500 text-white rounded-md hover:bg-red-700 text-xs sm:text-sm lg:text-sm order-2 sm:order-1 w-full sm:w-auto">Batal</button>

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Card: Total Laporan -->
+        <!-- Card: Total Reports -->
         <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-gray-50 hover:scale-[1.02]">
             <i class="fas fa-file-alt text-4xl text-black-600"></i>
             <div>
@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <!-- Card: Laporan Terkirim -->
+        <!-- Card: Sent Reports Count -->
         <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-blue-50 hover:scale-[1.02]">
             <i class="fas fa-paper-plane text-4xl text-blue-600"></i>
             <div>
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <!-- Card: Laporan Diproses -->
+        <!-- Card: In Review Reports Count -->
         <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-yellow-50 hover:scale-[1.02]">
             <i class="fas fa-spinner text-4xl text-yellow-500 animate-spin"></i>
             <div>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-        <!-- Card: Laporan Butuh Klarifikasi -->
+        <!-- Card: Clarification Need Count -->
         <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-orange-50 hover:scale-[1.02]">
             <i class="fas fa-question-circle text-4xl text-orange-500"></i>
             <div>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <!-- Card: Laporan Selesai -->
+        <!-- Card: Resolved Reports Count -->
         <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-green-50 hover:scale-[1.02]">
             <i class="fas fa-check-circle text-4xl text-green-600"></i>
             <div>
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <!-- Card: Laporan Selesai -->
+        <!-- Card: Denied Reports Count -->
         <div class="bg-white shadow rounded-xl p-6 flex items-center gap-4 transition-transform duration-300 hover:shadow-lg hover:bg-red-50 hover:scale-[1.02]">
             <i class="fas fa-ban text-4xl text-red-600"></i>
             <div>

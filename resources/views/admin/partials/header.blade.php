@@ -9,6 +9,5 @@
         <span class="text-gray-600 text-xs sm:text-sm lg:text-base whitespace-nowrap">
             👤 {{ session('admin_id') ? 'Admin #' . session('admin_id') : 'Guest' }}
         </span>
-        {{-- Bisa diganti nanti pakai nama admin --}}
     </div>
 </header>
