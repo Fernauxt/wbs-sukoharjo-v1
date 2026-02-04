@@ -102,19 +102,22 @@ class ReportController extends Controller
         }
 
         // Store evidence attachments if exists
-        $evidencePath = null;
-
         if ($request->hasFile('evidence')) {
             // Upload to Cloudinary
             // 'wbs_evidence' are the folder name in Cloudinary
-            foreach ($request->file('evidence') as $file) {
-                $uploadedFileUrl = Cloudinary::upload($request->file('evidence')->getRealPath(), ['folder' => 'wbs_evidence'])->getSecurePath();
+            $files = $request->file('evidence');
+            if(!is_array($files)){
+                $files = [$files];
+            }
 
-                $evidencePath = $uploadedFileUrl;
+            foreach ($files as $file) {
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath(), [
+                    'folder' => 'wbs_evidence',
+                ])->getSecurePath();
 
                 Attachment::create([
                     'report_id' => $report->id,
-                    'file_path' => $evidencePath,
+                    'file_path' => $uploadedFileUrl,
                     'file_name' => $file->getClientOriginalName(),
                     'file_type' => $file->getClientMimeType(),
                 ]);
