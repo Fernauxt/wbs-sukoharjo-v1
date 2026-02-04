@@ -6,14 +6,34 @@
     },
     "routes": [
         {
+            "src": "/build/(.*)",
+            "dest": "/build/$1"
+        },
+        {
+            "src": "/img/(.*)",
+            "dest": "/img/$1"
+        },
+        {
+            "src": "/storage/(.*)",
+            "dest": "/storage/$1"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "/favicon.ico"
+        },
+        {
+            "src": "/robots.txt",
+            "dest": "/robots.txt"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
-        "APP_URL": "https://wbs-sukoharjo-v1.vercel.app/",
+        "APP_DEBUG": "true",
+        "APP_URL": "https://wbs-sukoharjo-v1.vercel.app",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
@@ -21,6 +41,7 @@
         "APP_SERVICES_CACHE": "/tmp/services.php",
         "VIEW_COMPILED_PATH": "/tmp",
         "SESSION_DRIVER": "cookie",
-        "LOG_CHANNEL": "stderr"
+        "LOG_CHANNEL": "stderr",
+        "ASSET_URL": "https://wbs-sukoharjo-v1.vercel.app"
     }
 }
