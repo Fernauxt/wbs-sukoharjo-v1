@@ -18,6 +18,7 @@ use App\Models\FollowUpAttachment;
 use App\Mail\ReportTokenMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Admin;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ReportController extends Controller
 {
@@ -101,18 +102,56 @@ class ReportController extends Controller
         }
 
         // Store evidence attachments if exists
+        $evidencePath = null;
+
         if ($request->hasFile('evidence')) {
+            // Upload to Cloudinary
+            // 'wbs_evidence' are the folder name in Cloudinary
             foreach ($request->file('evidence') as $file) {
-                $path = $file->store('attachments', 'public');
+                $uploadedFileUrl = Cloudinary::upload($request->file('evidence')->getRealPath(), ['folder' => 'wbs_evidence'])->getSecurePath();
+
+                $evidencePath = $uploadedFileUrl;
 
                 Attachment::create([
                     'report_id' => $report->id,
-                    'file_path' => $path,
+                    'file_path' => $evidencePath,
                     'file_name' => $file->getClientOriginalName(),
                     'file_type' => $file->getClientMimeType(),
                 ]);
             }
         }
+
+        // if ($request->hasFile('evidence')) {
+        //     // Local storage approach
+        //     foreach ($request->file('evidence') as $file) {
+        //         $path = $file->store('attachments', 'public');
+
+        //         Attachment::create([
+        //             'report_id' => $report->id,
+        //             'file_path' => $path,
+        //             'file_name' => $file->getClientOriginalName(),
+        //             'file_type' => $file->getClientMimeType(),
+        //         ]);
+        //     }
+
+        //     // Vercel read-only approach (skip upload).
+        //     // try {
+        //     //     // Try to store file
+        //     //     $path = $request->file('evidence')->store('public/attachments');
+                
+        //     //     // If successful, save path to report
+        //     //     $report->evidence = $path;
+        //     //     $report->save(); 
+                
+        //     // } catch (\Exception $e) {
+        //     //     // If fails, log the error
+        //     //     // Do not let the whole process fail just because of file upload
+        //     //     \Log::error('Gagal upload file di environment ini: ' . $e->getMessage());
+                
+        //     //     // Optional: Give flash warning to user
+        //     //     // session()->flash('warning', 'Laporan terkirim, namun bukti gagal diunggah karena batasan server demo.');
+        //     // }
+        // }
 
         // Send email to informant if provided
         if ($informant->email)
