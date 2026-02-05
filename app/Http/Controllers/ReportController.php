@@ -111,16 +111,28 @@ class ReportController extends Controller
             }
 
             foreach ($files as $file) {
-                $uploadedFileUrl = Cloudinary::upload($file->getRealPath(), [
-                    'folder' => 'wbs_evidence',
-                ])->getSecurePath();
+                try {
+                    // Try to upload file to Cloudinary
+                    $uploadedFileUrl = Cloudinary::upload($file->getRealPath(), [
+                        'folder' => 'wbs_evidence'
+                    ])->getSecurePath();
 
-                Attachment::create([
-                    'report_id' => $report->id,
-                    'file_path' => $uploadedFileUrl,
-                    'file_name' => $file->getClientOriginalName(),
-                    'file_type' => $file->getClientMimeType(),
-                ]);
+                    // Successfully uploaded, save to attachments
+                    Attachment::create([
+                        'report_id' => $report->id,
+                        'file_path' => $uploadedFileUrl,
+                        'file_name' => $file->getClientOriginalName(),
+                        'file_type' => $file->getClientMimeType(),
+                    ]);
+
+                } catch (\Exception $e) {
+                    // Failed to upload to Cloudinary
+                    // 1. Log the error for debugging on Vercel
+                    \Log::error('Gagal upload ke Cloudinary: ' . $e->getMessage());
+                    
+                    // 2. Do not throw error to user
+                    // Report will still be created without attachment
+                }
             }
         }
 
