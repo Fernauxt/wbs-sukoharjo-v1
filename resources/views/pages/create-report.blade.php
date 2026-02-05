@@ -139,6 +139,7 @@
                             <input type="file" name="evidence[]" class="input w-full" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.zip" multiple/>
                             <p class="fieldset-label mt-1"></p>
                             <small>Format yang didukung: jpg, png, pdf. Maks 10 file. Maksimal 5MB per file</small>
+                            <span>⚠️ Mode Demo: File yang diupload tidak akan disimpan permanen.</span>
                         </fieldset>
                     </div>
 

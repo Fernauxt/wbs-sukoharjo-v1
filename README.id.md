@@ -11,6 +11,17 @@ Aplikasi ini merupakan **pengembangan lanjutan dari proyek magang**, yang kini d
 
 ---
 
+## ⚠️ Catatan Teknis & Batasan Demo (Vercel Deployment)
+
+Proyek ini didistribusikan (deploy) menggunakan **Vercel** dengan lingkungan *Serverless*. Dikarenakan batasan sistem file (ephemeral file system) pada lingkungan serverless, terdapat beberapa penyesuaian pada demo ini:
+
+* **Fitur Upload Bukti (Attachment)** saat ini **dinonaktifkan / tidak disimpan** pada versi live demo ini. Pengguna tetap dapat memilih file, namun file tersebut tidak akan disimpan secara permanen ke server.
+* Seluruh fitur inti lainnya (CRUD Pengaduan, Validasi Input, Generate Token Unik, hingga Dashboard Admin) berjalan **100% normal** dan terintegrasi dengan database **PostgreSQL (Neon)**.
+
+> **Catatan:** Fitur penyimpanan file (File Storage) berfungsi sepenuhnya dengan baik pada lingkungan pengembangan lokal (*Local Development Environment*) menggunakan penyimpanan standar Laravel.
+
+---
+
 ## ⚠️ Development Notes & Known Limitations
 
 Sebagai proyek portofolio yang sedang dalam tahap pengembangan aktif, terdapat beberapa catatan penting mengenai kondisi kode saat ini:

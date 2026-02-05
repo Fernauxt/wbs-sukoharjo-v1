@@ -11,6 +11,18 @@ This project is a **re-development of a system originally created during an inte
 
 ---
 
+## ⚠️ Demo Limitations (Vercel Deployment)
+
+This project is deployed on **Vercel** using a Serverless environment. Due to the ephemeral nature of the file system in serverless functions:
+
+* **File Uploads (Evidence/Attachments)** are currently **disabled/non-persistent** in this live demo.
+* Users can select files, but they will not be stored permanently.
+* All other core features (CRUD, Database Transactions, Token Generation, Admin Dashboard) work fully as intended using **Neon (PostgreSQL)**.
+
+> **Note:** Full file storage functionality works perfectly in the local development environment using standard Laravel Storage.
+
+---
+
 ## ⚠️ Development Notes & Known Limitations
 
 As an active portfolio project currently under development, please note the following technical conditions:
